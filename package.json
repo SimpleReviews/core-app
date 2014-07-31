@@ -1,0 +1,26 @@
+{
+  "name": "app-boilerplate",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "~4.2.0",
+    "static-favicon": "~1.0.0",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "ejs": "~0.8.5",
+    "backbone": "~1.1.2",
+    "underscore": "~1.6.0",
+    "jquery": "~2.1.1",
+    "orchestrate": "~0.3.1",
+    "hbsfy": "~2.0.0",
+    "handlebars": "~2.0.0-alpha.4"
+  },
+  "devDependencies": {
+    "browserify": "~5.9.1"
+  }
+}
