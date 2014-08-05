@@ -28,7 +28,6 @@ app.use('/', function(req, res) {
   res.sendfile('public/index.html');
 });
 
-app.use('/', index);
 app.use('/category/', categories);
 app.use('/product/', products);
 
