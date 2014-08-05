@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var config = require('../config.js');
+var db = require('orchestrate')(config.dbKey);
 
-/* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+    db.list('categories')
+        .then(function (result) {
+            res.render('index', {categories: result.body.results});
+            console.log(result);
+        })
+        .fail(function (err){
+            res.send(err.body.message);
+            console.log(err);
+        });
 });
 
 module.exports = router;

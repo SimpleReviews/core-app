@@ -4,6 +4,12 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('./config.js');
+var db = require('orchestrate')(config.dbKey);
+
+var index = require('./routes/index');
+var categories = require('./routes/categories');
+var products = require('./routes/products');
 
 var app = express();
 
@@ -21,6 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', function(req, res) {
   res.sendfile('public/index.html');
 });
+
+app.use('/', index);
+app.use('/category/', categories);
+app.use('/product/', products);
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
