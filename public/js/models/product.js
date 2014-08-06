@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 
 var Product = Backbone.Model.extend({});
 
-Product.set('FIXTURES', [
+Product.FIXTURES = [
   {
     "id": 1,
     "name": "Fitbit",
@@ -11,6 +11,6 @@ Product.set('FIXTURES', [
       "fitness"
     ]
   }
-]);
+];
 
 module.exports = Product;
