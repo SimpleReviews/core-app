@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var config = require('../config.js');
-var Q = require('q');
 var db = require('orchestrate')(config.dbKey);
 
 router.get('/', function(req,res){
