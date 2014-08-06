@@ -83,11 +83,10 @@ router.get('/:product', function(req, res) {
                     goodReviews.push(reviews[review].value);
                 }
             }
-
-            res.render('products', {goodReviews: goodReviews,goodReviewsCount: goodReviewsCount, badReviews: badReviews, badReviewsCount: badReviewsCount, product: product, category: catName});
+            res.json({goodReviews: goodReviews,goodReviewsCount: goodReviewsCount, badReviews: badReviews, badReviewsCount: badReviewsCount, product: product, category: catName});
         })
         .fail(function (response){
-            res.render('error',err);
+            //res.render('error',err);
         });
     });
 
