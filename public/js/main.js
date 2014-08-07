@@ -2,27 +2,21 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = $;
 
-var CategoriesIndexView = require('./views/categories/index');
-var CategoriesShowView = require('./views/categories/show');
-var ProductsShowView = require('./views/products/show');
+var CategoriesView = require('./views/categories');
+var CategoryCollection = require('./collections/categories');
 
 var Router = Backbone.Router.extend({
   routes: {
-    '': 'showCategories',
-    'categories/:id': 'showCategory',
-    'products/:id': 'showProduct'
+    '': 'categories'
   },
-  showCategories: function () {
-    this.categoriesIndexView = new CategoriesIndexView({ el: 'body' });
-    this.categoriesIndexView.render();
+  initialize: function() {
+    this.categories = new CategoryCollection();
   },
-  showCategory: function() {
-    this.categoriesShowView = new CategoriesShowView({ el: 'body' });
-    this.categoriesShowView.render();
-  },
-  showProduct: function() {
-    this.productsShowView = new ProductsShowView({ el: 'body' });
-    this.productsShowView.render();
+  categories: function() {
+    this.categoriesView = new CategoriesView({
+      el: 'body',
+      collection: this.categories
+    });
   }
 });
 
