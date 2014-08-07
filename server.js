@@ -25,8 +25,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/category/', category);
-app.use('/product/', products);
+app.use('/categories/', categories);
+app.use('/products/', products);
 
 app.use('/', function(req, res) {
   res.sendfile('public/index.html');

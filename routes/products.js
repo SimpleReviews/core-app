@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 var config = require('../config.js');
 var db = require('orchestrate')(config.dbKey);
+var normalize = require('./normalize.js');
+
 
 router.get('/', function(req, res) {
     db.list('products')
         .then(function (result) {
-            res.json(result.body.results);
+            res.json(normalize(result.body.results));
         })
         .fail(function (err){
             res.send(err.body.message);
