@@ -2,9 +2,18 @@ var express = require('express');
 var router = express.Router();
 var config = require('../config.js');
 var db = require('orchestrate')(config.dbKey);
+var normalize = require('./normalize.js');
 
-router.get('/', function(req,res){
-    res.redirect('../');
+
+router.get('/', function(req, res) {
+    db.list('products')
+        .then(function (result) {
+            res.json(normalize(result.body.results));
+        })
+        .fail(function (err){
+            res.send(err.body.message);
+            //console.log(err);
+        });
 });
 
 var prodName;
@@ -83,11 +92,10 @@ router.get('/:product', function(req, res) {
                     goodReviews.push(reviews[review].value);
                 }
             }
-
-            res.render('products', {goodReviews: goodReviews,goodReviewsCount: goodReviewsCount, badReviews: badReviews, badReviewsCount: badReviewsCount, product: product, category: catName});
+            res.json({goodReviews: goodReviews,goodReviewsCount: goodReviewsCount, badReviews: badReviews, badReviewsCount: badReviewsCount, product: product, category: catName});
         })
         .fail(function (response){
-            res.render('error',err);
+            //res.render('error',err);
         });
     });
 

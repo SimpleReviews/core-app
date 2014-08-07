@@ -2,9 +2,17 @@ var express = require('express');
 var router = express.Router();
 var config = require('../config.js');
 var db = require('orchestrate')(config.dbKey);
+var normalize = require('./normalize.js');
 
-router.get('/', function(req,res){
-    res.redirect('../');
+router.get('/', function(req, res) {
+    db.list('categories')
+        .then(function (result) {
+            res.json(normalize(result.body.results));
+        })
+        .fail(function (err){
+            res.send(err.body.message);
+            //console.log(err);
+        });
 });
 
 var catName;
@@ -38,7 +46,7 @@ router.get('/:category', function(req, res) {
 
     getProducts(cat)
         .then(function (response) {
-            res.render('categories', {products: response.products, category: catName});
+            res.json({products: response.products, category: catName});
         })
         .fail(function (response){
             res.render('error',err);
