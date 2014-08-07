@@ -9,13 +9,20 @@ var CategoriesView = Backbone.View.extend({
     this.collection = options.collection;
     //this.collection.add(Category.FIXTURES);
     this.listenTo(this.collection, 'all', this.render);
-    this.collection.fetch();
+    this.collection.fetch()
+      .then(function(res) {
+        console.log(res);
+      });
+
     this.render();
   },
   render: function () {
     var data = [];
     this.collection.models.forEach(function(item) {
-      data.push({name: item.get('name')});
+      data.push({
+        key: item.get('key'),
+        name: item.get('labelPlural')
+      });
     });
     this.$el.html(this.template({categories: data}));
   }

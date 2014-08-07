@@ -3,7 +3,7 @@ var Category = require('../models/category');
 
 var Categories = Backbone.Collection.extend({
   model: Category,
-  url: '/api/categories'
+  url: '/categories'
 });
 
 module.exports = Categories;
