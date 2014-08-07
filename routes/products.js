@@ -11,92 +11,41 @@ router.get('/', function(req, res) {
             res.json(normalize(result.body.results));
         })
         .fail(function (err){
-            res.send(err.body.message);
-            //console.log(err);
+            res.json(err.body.message);
         });
 });
 
-var prodName;
-var catName;
-var product;
+router.get('/:key', function(req, res) {
+    var product;
+    var reviews;
 
-var getCat = function(cat){
-    return db.get('categories',cat)
-        .then(function (result){
-            catName = result.body.labelPlural;
-            return catName;
-        })
-        .fail(function (err){
-            res.render('error',err);
+    db.get('products', req.params.key)
+      .then(function (res){
+          product = res.body;
+          return product;
+      })
+      .then(function(product) {
+          return db.newGraphReader()
+              .get()
+              .from('products', product)
+              .related('review');
+      })
+      .then(function(res) {
+          reviews = res.body.results;
+      })
+      .then(function() {
+          return db.get('categories', product.cat);
+      })
+      .then(function(results) {
+        res.json({
+          reviews: reviews,
+          product: product,
+          category: results.body.labelPlural
         });
-};
-
-var getProd = function(prod){
-    return db.get('products',prod)
-        .then(function (result){
-            product = result.body;
-            return product;
-        })
-        .fail(function (err){
-            res.render('error',err);
-        });
-};
-
-var getReviews = function(prod){
-    return db.newGraphReader()
-        .get()
-        .from('products',prod)
-        .related('review')
-        .then(function(response){
-            var reviews = response.body.results;
-            return {count: response.body.count, reviews: reviews};
-        });
-};
-
-router.get('/:product', function(req, res) {
-    var prod = req.params.product;
-
-    getProd(prod);
-
-    getReviews(prod)
-        .then(function (response) {
-            getCat(product.cat);
-            console.log(response);
-            
-            //Sort Reviews
-            var reviews = response.reviews.sort(function(a,b){
-                if (a.value.count > b.value.count) {
-                    return -1;
-                }
-                if (a.value.count < b.value.count){
-                    return 1;
-                }
-                else{
-                    return 0;
-                }
-            });
-            
-            //Count and Separate Reviews
-            var goodReviews = [];
-            var badReviews = [];
-            var goodReviewsCount = 0;
-            var badReviewsCount = 0;
-            for (var review = 0; review < response.count; review++){
-                if (reviews[review].value.type == 'bad') {
-                    console.log(reviews[review].value);
-                    badReviewsCount += reviews[review].value.count;
-                    badReviews.push(reviews[review].value);
-                }
-                if (reviews[review].value.type == 'good') {
-                    goodReviewsCount += reviews[review].value.count;
-                    goodReviews.push(reviews[review].value);
-                }
-            }
-            res.json({goodReviews: goodReviews,goodReviewsCount: goodReviewsCount, badReviews: badReviews, badReviewsCount: badReviewsCount, product: product, category: catName});
-        })
-        .fail(function (response){
-            //res.render('error',err);
-        });
-    });
+      })
+      .fail(function(err) {
+          res.json(err.body.message);
+      });
+});
 
 module.exports = router;
