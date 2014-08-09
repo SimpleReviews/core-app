@@ -2,29 +2,19 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = $;
 
-Backbone.Collection.prototype.findModel = function(id) {
-  var model = this.get(id);
-  if (!model) {
-    model = this.add({id: id});
-    model.fetch();
-  }
-  return model;
-};
-
 var CategoriesView = require('./views/categories');
 var CategoryCollection = require('./collections/categories');
-
-var ProductsView = require('./views/products');
+var CategoryView = require('./views/category');
 var ProductCollection = require('./collections/products');
-
 var ProductView = require('./views/product');
 var Product = require('./models/product');
+var Category = require('./models/category');
 
 var Router = Backbone.Router.extend({
   routes: {
     '': 'categories',
-    'categories/:key': 'category',
-    'products/:key': 'product',
+    'categories/:id': 'category',
+    'products/:id': 'product',
     '*notFound': 'notFound'
   },
   initialize: function() {
@@ -32,23 +22,33 @@ var Router = Backbone.Router.extend({
     this.products = new ProductCollection();
   },
   categories: function() {
-    this.categoriesView = new CategoriesView({
-      el: 'body',
-      collection: this.categories
+    var self = this;
+    this.categories.fetch().then(function() {
+      self.categoriesView = new CategoriesView({
+        el: 'body',
+        collection: self.categories
+      });
     });
   },
-  category: function(key) {
-    this.productsView = new ProductsView({
-      el: 'body',
-      key: key,
-      collection: this.products
+  category: function(id) {
+    var self = this;
+    var category = new Category({ id: id });
+    category.urlRoot = '/categories';
+    category.fetch().then(function() {
+      self.categoryView = new CategoryView({
+        el: 'body',
+        model: category
+      });
     });
   },
-  product: function(key) {
-    var model = this.products.findModel(key);
-    this.productView = new ProductView({
-      el: 'body',
-      model: model
+  product: function(id) {
+    var product = new Product({ id: id });
+    product.urlRoot = '/products';
+    product.fetch().then(function() {
+      self.productView = new ProductView({
+        el: 'body',
+        model: product
+      });
     });
   },
   notFound: function() {
