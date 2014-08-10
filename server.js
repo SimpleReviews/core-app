@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var config = require('./config.js');
 var db = require('orchestrate')(config.dbKey);
 
-var category = require('./routes/category');
 var categories = require('./routes/categories');
 var products = require('./routes/products');
 
