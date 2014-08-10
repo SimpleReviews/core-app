@@ -1,11 +1,12 @@
 var View = require('./base');
-var template = require('../../templates/categories.hbs');
+var template = require('../../templates/category.hbs');
 
 module.exports = View.extend({
   template: template,
 
   initialize: function(options) {
-    console.log('categories');
+    console.log('category');
+    //this.model.on('request', this.renderLoading, this);
     this.render();
   }
 });

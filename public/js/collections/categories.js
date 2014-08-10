@@ -1,9 +1,7 @@
-var Backbone = require('backbone');
+var Collection = require('./base');
 var Category = require('../models/category');
 
-var Categories = Backbone.Collection.extend({
+module.exports = Collection.extend({
   model: Category,
   url: '/categories'
 });
-
-module.exports = Categories;

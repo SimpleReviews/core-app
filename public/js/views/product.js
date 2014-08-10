@@ -1,32 +1,12 @@
-var $ = require('jquery');
-var Backbone = require('backbone');
-Backbone.$ = $;
-var Product = require('../models/product');
+var View = require('./base');
+var template = require('../../templates/product.hbs');
 
-var ProductView = Backbone.View.extend({
-  isLoading: true,
-  template: require('../../templates/product.hbs'),
+module.exports = View.extend({
+  template: template,
+
   initialize: function(options) {
-    var self = this;
-    this.model = options.model;
-    this.listenTo(this.model, 'all', this.render);
-    /*
-    this.model.fetch()
-      .then(function(res) {
-        console.log(res);
-        self.isLoading = false;
-        self.render();
-      });
-      */
+    console.log('product');
+    //this.model.on('request', this.renderLoading, this);
     this.render();
-  },
-  render: function () {
-    console.log('render');
-    this.$el.html(this.template({
-      //isLoading: this.isLoading,
-      model: this.model.toJSON()
-    }));
   }
 });
-
-module.exports = ProductView;
