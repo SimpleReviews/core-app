@@ -29,7 +29,7 @@ var Router = Backbone.Router.extend({
     var self = this;
     this.categories.fetch().then(function() {
       self.categoriesView = new CategoriesView({
-        el: 'body',
+        el: '#app',
         collection: self.categories
       });
     });
@@ -40,14 +40,14 @@ var Router = Backbone.Router.extend({
     category.urlRoot = '/categories';
     category.fetch().then(function() {
       self.categoryView = new CategoryView({
-        el: 'body',
+        el: '#app',
         model: category
       });
     });
   },
   categoryNew: function() {
     this.categoryNewView = new CategoryNewView({
-      el: 'body',
+      el: '#app',
       collection: this.categories
     });
   },
@@ -56,14 +56,14 @@ var Router = Backbone.Router.extend({
     product.urlRoot = '/products';
     product.fetch().then(function() {
       self.productView = new ProductView({
-        el: 'body',
+        el: '#app',
         model: product
       });
     });
   },
   productNew: function() {
     this.productNewView = new ProductNewView({
-      el: 'body',
+      el: '#app',
       collection: this.products
     });
   },
