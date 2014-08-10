@@ -5,6 +5,7 @@ Backbone.$ = $;
 var CategoriesView = require('./views/categories');
 var CategoryCollection = require('./collections/categories');
 var CategoryView = require('./views/category');
+var CategoryNewView = require('./views/category-new');
 var ProductCollection = require('./collections/products');
 var ProductView = require('./views/product');
 var Product = require('./models/product');
@@ -13,6 +14,7 @@ var Category = require('./models/category');
 var Router = Backbone.Router.extend({
   routes: {
     '': 'categories',
+    'categories/new': 'categoryNew',
     'categories/:id': 'category',
     'products/:id': 'product',
     '*notFound': 'notFound'
@@ -31,6 +33,7 @@ var Router = Backbone.Router.extend({
     });
   },
   category: function(id) {
+    console.log(id)
     var self = this;
     var category = new Category({ id: id });
     category.urlRoot = '/categories';
@@ -39,6 +42,12 @@ var Router = Backbone.Router.extend({
         el: 'body',
         model: category
       });
+    });
+  },
+  categoryNew: function() {
+    this.categoryNewView = new CategoryNewView({
+      el: 'body',
+      collection: this.categories
     });
   },
   product: function(id) {
