@@ -3,8 +3,33 @@ var router = express.Router();
 var config = require('../config.js');
 var db = require('orchestrate')(config.dbKey);
 var normalize = require('./normalize.js');
-var denorm = require('./denorm-categories');
+var denorm_products = require('./denorm-products');
+var denorm_categories = require('./denorm-categories');
 var kew = require('kew');
+
+function graphManyToMany(categoryId, products) {
+  var promises = [];
+  console.log('products');
+  if (products && products.length) {
+    products.forEach(function(item) {
+      promises.push(
+        db.newGraphBuilder()
+          .create()
+          .from('categories', categoryId)
+          .related('products')
+          .to('products', item.id)
+      );
+      promises.push(
+        db.newGraphBuilder()
+          .create()
+          .from('products', item.id)
+          .related('categories')
+          .to('categories', categoryId)
+      );
+    });
+  }
+  return kew.all(promises);
+}
 
 router.get('/', function(req, res) {
   db.list('denorm_categories')
@@ -29,11 +54,18 @@ router.get('/:id', function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
+  var statusCode;
   db.put('categories', req.params.id, req.body)
     .then(function(results) {
-      // TODO add graphs
-      denorm.run({ collection: 'categories' });
-      res.status(results.statusCode);
+      console.log(results.headers);
+      statusCode = results.statusCode;
+      return graphManyToMany(req.params.id, req.body.products);
+    })
+    .then(function(results) {
+      console.log('here')
+      denorm_products.run({ collection: 'products' });
+      denorm_categories.run({ collection: 'categories' });
+      res.status(statusCode).end();
     })
     .fail(function(err) {
       res.status(err.statusCode)
@@ -42,27 +74,18 @@ router.put('/:id', function(req, res) {
 });
 
 router.post('/', function(req, res) {
+  console.log('categories')
   db.post('categories', req.body)
     .then(function(results) {
-      var promises = [];
       // get the key that orchestrate creates from the header
       req.body.id = results.headers.location.split('/')[3];
-
-      if (req.body.products && req.body.products.length) {
-        req.body.products.forEach(function(item) {
-          promises.push(
-            db.newGraphBuilder()
-              .create()
-              .from('categories', req.body.id)
-              .related('products')
-              .to('products', item.id)
-          );
-        });
-      }
-      return kew.all(promises);
+      // TODO run this in parallel, there could be a lot of products which would hold up the
+      // post request
+      return graphManyToMany(req.body.id, req.body.products);
     })
     .then(function(results) {
-      denorm.run({ collection: 'categories' });
+      denorm_products.run({ collection: 'products' });
+      denorm_categories.run({ collection: 'categories' });
       res.json(req.body);
     })
     .fail(function(err) {
@@ -74,7 +97,7 @@ router.post('/', function(req, res) {
 router.delete('/:id', function(req, res) {
   db.remove('categories')
     .then(function(results) {
-      res.status(results.statusCode);
+      res.status(results.statusCode).end();
     })
     .fail(function(err) {
       res.status(err.statusCode)

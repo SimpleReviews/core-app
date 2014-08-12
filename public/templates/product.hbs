@@ -1,4 +1,15 @@
 <div class="wrapper">
-  <h1>Product</h1>
-  {{name}}
+  <h1>{{name}}</h1>
+  <h2>Categories</h2>
+  <ul>
+  {{#each categories}}
+    <li>{{id}}-{{name}}</li>
+  {{/each}}
+  </ul>
+  <h2>Reviews</h2>
+  <ul>
+  {{#each reviews}}
+    <li>{{body}}</li>
+  {{/each}}
+  </ul>
 </div>

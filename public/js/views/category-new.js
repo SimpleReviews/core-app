@@ -26,7 +26,7 @@ module.exports = View.extend({
       name: name
     }, {
       success: function(model) {
-        window.app.navigate('categories/' + model.get('id'), { trigger: true });
+        window.app.navigate('/categories/' + model.get('id'), { trigger: true });
       },
       error: function(model, xhr) {
         console.error(xhr);
