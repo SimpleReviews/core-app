@@ -7,7 +7,7 @@ module.exports = View.extend({
   initialize: function(options) {
     console.log('product');
     //this.model.on('request', this.renderLoading, this);
-    this.model.on('sync', this.render, this);
+    this.model.on('change', this.render, this);
     this.render();
   }
 });

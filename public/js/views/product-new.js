@@ -11,48 +11,52 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('category-new');
+    this.searchResults = [];
     this.render();
   },
 
   afterRender: function() {
-    this.$('#name').focus();
-    $('select').selectize({
-      valueField: 'name',
+    var self = this;
+    $('#name').selectize({
+      valueField: 'ean',
       labelField: 'name',
-			searchField: 'name',
-			options: [],
-			create: false,
-			render: {
-				option: function(item, escape) {
-					return '<div>' + escape(item.name) + '</div>';
-				}
-			},
-			load: function(query, callback) {
-				if (!query.length) return callback();
-				$.ajax({
-					url: '/categories/search',
-					type: 'GET',
-					data: {
-						q: query
-					},
-					error: function() {
-						callback();
-					},
-					success: function(res) {
-						console.log(res);
-						callback(res);
-					}
-				});
-			}
+      searchField: 'name',
+      options: [],
+      create: false,
+      render: {
+        option: function(item, escape) {
+          return '<div>' + escape(item.name) +
+          '<p><b>' + escape(item.category) + '</b></p>' +
+          '</div>';
+        }
+      },
+      load: function(query, callback) {
+        if (!query.length) return callback();
+        $.ajax({
+          url: '/semantics3/search?q='+query,
+          type: 'GET',
+          error: function() {
+            callback();
+          },
+          success: function(res) {
+            console.log(res);
+            callback(res);
+            res.forEach(function(item) {
+              self.searchResults[item.ean] = item;
+            });
+          }
+        });
+      }
     });
   },
 
   handleSubmit: function(e) {
     e.preventDefault();
-    var name = this.$el.find('#name').val();
+    var product = this.searchResults[this.$el.find('#name').val()];
 
     this.collection.create({
-      name: name
+      name: product.name,
+      product_data: product
     }, {
       success: function(model) {
         window.app.navigate('/products/' + model.get('id'), { trigger: true });
