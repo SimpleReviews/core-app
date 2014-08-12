@@ -3,54 +3,118 @@ var router = express.Router();
 var config = require('../config.js');
 var db = require('orchestrate')(config.dbKey);
 var normalize = require('./normalize.js');
+var denorm_products = require('./denorm-products');
+var denorm_categories = require('./denorm-categories');
+var kew = require('kew');
+
+function graphManyToMany(categoryId, products) {
+  var promises = [];
+  console.log('products');
+  if (products && products.length) {
+    products.forEach(function(item) {
+      promises.push(
+        db.newGraphBuilder()
+          .create()
+          .from('categories', categoryId)
+          .related('products')
+          .to('products', item.id)
+      );
+      promises.push(
+        db.newGraphBuilder()
+          .create()
+          .from('products', item.id)
+          .related('categories')
+          .to('categories', categoryId)
+      );
+    });
+  }
+  return kew.all(promises);
+}
 
 router.get('/', function(req, res) {
-    db.list('categories')
-        .then(function (result) {
-            res.json(normalize(result.body.results));
-        })
-        .fail(function (err){
-            res.send(err.body.message);
-            //console.log(err);
-        });
+  db.list('denorm_categories')
+    .then(function(results) {
+      res.json(normalize(results.body.results));
+    })
+    .fail(function(err) {
+      res.status(err.statusCode)
+        .json({ message: err.body.message });
+    });
 });
 
-var catName;
+router.get('/search', function(req, res) {
+  var query = req.query.q;
+  db.newSearchBuilder()
+  .collection('categories')
+  .limit(100)
+  .query(query)
+  .then(function(results) {
+    res.json(normalize(results.body.results));
+  })
+  .fail(function(err) {
+    res.status(err.statusCode)
+      .json({ message: err.body.message });
+  });
+});
 
-var getCat = function(cat){
-    return db.get('categories',cat)
-        .then(function (result){
-            catName = result.body.labelPlural;
-            return catName;
-        })
-        .fail(function (err){
-            res.render('error',err);
-        });
-};
-
-var getProducts = function(cat){
-    return db.newGraphReader()
-        .get()
-        .from('categories',cat)
-        .related('product')
-        .then(function(response){
-            var products = response.body.results;
-            return {count: response.body.count, products: products};
-        });
-};
-
-router.get('/:category', function(req, res) {
-    var cat = req.params.category;
-
-    getCat(cat);
-
-    getProducts(cat)
-        .then(function (response) {
-            res.json({products: response.products, category: catName});
-        })
-        .fail(function (response){
-            res.render('error',err);
-        });
+router.get('/:id', function(req, res) {
+  db.get('denorm_categories', req.params.id)
+    .then(function(results) {
+      res.json(results.body);
+    })
+    .fail(function(err) {
+      res.status(err.statusCode)
+        .json({ message: err.body.message });
     });
+});
+
+router.put('/:id', function(req, res) {
+  var statusCode;
+  db.put('categories', req.params.id, req.body)
+    .then(function(results) {
+      statusCode = results.statusCode;
+      return graphManyToMany(req.params.id, req.body.products);
+    })
+    .then(function(results) {
+      denorm_products.run({ collection: 'products' });
+      denorm_categories.run({ collection: 'categories' });
+      res.status(statusCode).end();
+    })
+    .fail(function(err) {
+      res.status(err.statusCode)
+        .json({ message: err.body.message });
+    });
+});
+
+router.post('/', function(req, res) {
+  db.post('categories', req.body)
+    .then(function(results) {
+      // get the key that orchestrate creates from the header
+      req.body.id = results.headers.location.split('/')[3];
+      // TODO run this in parallel, there could be a lot of products which would hold up the
+      // post request
+      return graphManyToMany(req.body.id, req.body.products);
+    })
+    .then(function(results) {
+      denorm_products.run({ collection: 'products' });
+      denorm_categories.run({ collection: 'categories' });
+      res.json(req.body);
+    })
+    .fail(function(err) {
+      res.status(err.statusCode)
+        .json({ message: err.body.message });
+    });
+});
+
+router.delete('/:id', function(req, res) {
+  db.remove('categories')
+    .then(function(results) {
+      res.status(results.statusCode).end();
+    })
+    .fail(function(err) {
+      res.status(err.statusCode)
+        .json({ message: err.body.message });
+    });
+});
 
 module.exports = router;

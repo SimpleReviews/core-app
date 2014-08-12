@@ -7,9 +7,9 @@ var bodyParser = require('body-parser');
 var config = require('./config.js');
 var db = require('orchestrate')(config.dbKey);
 
-var category = require('./routes/category');
 var categories = require('./routes/categories');
 var products = require('./routes/products');
+var semantics3 = require('./routes/semantics3');
 
 var app = express();
 
@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/categories/', categories);
 app.use('/products/', products);
+app.use('/semantics3/', semantics3);
 
 app.use('/', function(req, res) {
   res.sendfile('public/index.html');
