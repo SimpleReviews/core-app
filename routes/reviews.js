@@ -3,7 +3,7 @@ var router = express.Router();
 var config = require('../config.js');
 var db = require('orchestrate')(config.dbKey);
 var normalize = require('./normalize.js');
-var denorm = require('./denorm-reviews');
+var products_denorm = require('./denorm-products');
 var kew = require('kew');
 
 router.get('/', function(req, res) {
@@ -31,7 +31,7 @@ router.get('/:id', function(req, res) {
 router.put('/:id', function(req, res) {
   db.put('reviews', req.params.id, req.body)
     .then(function(results) {
-      denorm.run({ collection: 'reviews' });
+      //denorm.run({ collection: 'reviews' });
       res.status(results.statusCode);
     })
     .fail(function(err) {
@@ -43,9 +43,15 @@ router.put('/:id', function(req, res) {
 router.post('/', function(req, res) {
   db.post('reviews', req.body)
     .then(function(results) {
-      var promises = [];
       req.body.id = results.headers.location.split('/')[3];
-      denorm.run({ collection: 'reviews' });
+      return db.newGraphBuilder()
+        .create()
+        .from('products', req.body.product_id)
+        .related('reviews')
+        .to('reviews', req.body.id);
+    })
+    .then(function() {
+      products_denorm.run({ collection: 'products' });
       res.json(req.body);
     })
     .fail(function(err) {

@@ -67,6 +67,17 @@ router.post('/', function(req, res) {
           );
         });
       }
+      if (req.body.reviews && req.body.reviews.length) {
+        req.body.reviews.forEach(function(item) {
+          promises.push(
+            db.newGraphBuilder()
+              .create()
+              .from('products', req.body.id)
+              .related('reviews')
+              .to('reviews', item.id)
+          );
+        });
+      }
       return kew.all(promises);
     })
     .then(function(results) {

@@ -9,9 +9,16 @@
   {{/each}}
   </ul>
   <h2>Reviews</h2>
-  <ul>
-  {{#each reviews}}
-    <li>{{body}}</li>
+  <h3>Positive</h3>
+  <ul id="positive">
+  {{#each positiveReviews}}
+    <li>{{text}}</li>
+  {{/each}}
+  </ul>
+  <h3>Negative</h3>
+  <ul id="negative">
+  {{#each negativeReviews}}
+    <li>{{text}}</li>
   {{/each}}
   </ul>
 </div>

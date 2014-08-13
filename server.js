@@ -9,6 +9,7 @@ var db = require('orchestrate')(config.dbKey);
 
 var categories = require('./routes/categories');
 var products = require('./routes/products');
+var reviews = require('./routes/reviews');
 var semantics3 = require('./routes/semantics3');
 
 var app = express();
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/categories/', categories);
 app.use('/products/', products);
+app.use('/reviews/', reviews);
 app.use('/semantics3/', semantics3);
 
 app.use('/', function(req, res) {

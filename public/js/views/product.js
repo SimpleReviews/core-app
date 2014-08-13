@@ -8,6 +8,7 @@ module.exports = View.extend({
     console.log('product');
     //this.model.on('request', this.renderLoading, this);
     this.model.on('change', this.render, this);
+    console.log(this.model);
     this.render();
   }
 });
