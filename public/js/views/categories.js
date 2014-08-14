@@ -6,6 +6,6 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('categories');
-    this.render();
+    //this.render();
   }
 });

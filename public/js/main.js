@@ -2,6 +2,8 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = $;
 
+var AppView = require('./views/app');
+
 var CategoriesView = require('./views/categories');
 var CategoryCollection = require('./collections/categories');
 var CategoryView = require('./views/category');
@@ -22,43 +24,34 @@ var Router = Backbone.Router.extend({
     '*notFound': 'notFound'
   },
   initialize: function() {
+    this.appView = new AppView({ el: 'body' });
     this.categories = new CategoryCollection();
     this.products = new ProductCollection();
   },
   categories: function() {
     var self = this;
     this.categories.fetch().then(function() {
-      self.categoriesView = new CategoriesView({
-        el: '#app',
+      self.renderDetail(new CategoriesView({
         collection: self.categories
-      });
+      }));
     });
   },
   category: function(id) {
     var category = this.categories.getOrFetch(id);
-    this.categoryView = new CategoryView({
-      el: '#app',
-      model: category
-    });
+    this.renderDetail(new CategoryView({ model: category }));
   },
   categoryNew: function() {
-    this.categoryNewView = new CategoryNewView({
-      el: '#app',
-      collection: this.categories
-    });
+    this.renderDetail(new CategoryNewView({ collection: this.categories }));
   },
   product: function(id) {
     var product = this.products.getOrFetch(id);
-    this.productView = new ProductView({
-      el: '#app',
-      model: product
-    });
+    this.renderDetail(new ProductView({ model: product }));
   },
   productNew: function() {
-    this.productNewView = new ProductNewView({
-      el: '#app',
-      collection: this.products
-    });
+    this.renderDetail(new ProductNewView({ collection: this.products }));
+  },
+  renderDetail: function(view) {
+    this.appView.renderChildView(view);
   },
   notFound: function() {
     $('body').html('<h1>Route not found</h1>');
