@@ -12,7 +12,6 @@ module.exports = View.extend({
   initialize: function(options) {
     console.log('category-new');
     this.searchResults = [];
-    this.render();
   },
 
   afterRender: function() {

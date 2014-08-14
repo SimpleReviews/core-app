@@ -8,6 +8,5 @@ module.exports = View.extend({
     console.log('category');
     //this.model.on('request', this.renderLoading, this);
     this.model.on('change', this.render, this);
-    this.render();
   }
 });

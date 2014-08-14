@@ -11,7 +11,6 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('category-new');
-    this.render();
   },
 
   afterRender: function() {
