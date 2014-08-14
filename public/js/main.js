@@ -31,9 +31,7 @@ var Router = Backbone.Router.extend({
   categories: function() {
     var self = this;
     this.categories.fetch().then(function() {
-      self.renderDetail(new CategoriesView({
-        collection: self.categories
-      }));
+      self.renderDetail(new CategoriesView({ collection: self.categories }));
     });
   },
   category: function(id) {
