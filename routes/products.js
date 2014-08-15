@@ -32,9 +32,9 @@ router.get('/:id', function(req, res) {
 router.put('/:id', function(req, res) {
   db.put('products', req.params.id, req.body)
     .then(function(results) {
-      // TODO add graphs
-      denorm.run({ collection: 'products' });
-      res.status(results.statusCode);
+      denorm_products.run({ collection: 'products' });
+      denorm_categories.run({ collection: 'categories' });
+      res.status(results.statusCode).end();
     })
     .fail(function(err) {
       res.status(err.statusCode)
@@ -49,36 +49,20 @@ router.post('/', function(req, res) {
       // get the key that orchestrate creates from the header
       req.body.id = results.headers.location.split('/')[3];
 
-      if (req.body.categories && req.body.categories.length) {
-        req.body.categories.forEach(function(item) {
-          promises.push(
-            db.newGraphBuilder()
-              .create()
-              .from('products', req.body.id)
-              .related('categories')
-              .to('categories', item.id)
-          );
-          promises.push(
-            db.newGraphBuilder()
-              .create()
-              .from('categories', item.id)
-              .related('products')
-              .to('products', req.body.id)
-          );
+      if (req.body.category) {
+        return db.post('categories', {
+          name: req.body.category
         });
       }
-      if (req.body.reviews && req.body.reviews.length) {
-        req.body.reviews.forEach(function(item) {
-          promises.push(
-            db.newGraphBuilder()
-              .create()
-              .from('products', req.body.id)
-              .related('reviews')
-              .to('reviews', item.id)
-          );
-        });
-      }
-      return kew.all(promises);
+
+      return kew.reject('missing category');
+    })
+    .then(function(results) {
+      return db.newGraphBuilder()
+        .create()
+        .from('categories', results.headers.location.split('/')[3])
+        .related('products')
+        .to('products', req.body.id)
     })
     .then(function(results) {
       denorm_products.run({ collection: 'products' });
@@ -86,6 +70,10 @@ router.post('/', function(req, res) {
       res.json(req.body);
     })
     .fail(function(err) {
+      if (!err.statusCode) {
+        res.status(404).json({ message: err });
+      }
+
       res.status(err.statusCode)
         .json({ message: err.body.message });
     });
@@ -94,6 +82,8 @@ router.post('/', function(req, res) {
 router.delete('/:id', function(req, res) {
   db.remove('products')
     .then(function(results) {
+      denorm_products.run({ collection: 'products' });
+      denorm_categories.run({ collection: 'categories' });
       res.status(results.statusCode);
     })
     .fail(function(err) {
