@@ -55,7 +55,8 @@ module.exports = View.extend({
 
     this.collection.create({
       name: product.name,
-      product_data: product
+      product_data: product,
+      category: product.category
     }, {
       success: function(model) {
         window.app.navigate('/products/' + model.get('id'), { trigger: true });

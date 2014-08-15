@@ -7,32 +7,8 @@ var denorm_products = require('./denorm-products');
 var denorm_categories = require('./denorm-categories');
 var kew = require('kew');
 
-function graphManyToMany(categoryId, products) {
-  var promises = [];
-  console.log('products');
-  if (products && products.length) {
-    products.forEach(function(item) {
-      promises.push(
-        db.newGraphBuilder()
-          .create()
-          .from('categories', categoryId)
-          .related('products')
-          .to('products', item.id)
-      );
-      promises.push(
-        db.newGraphBuilder()
-          .create()
-          .from('products', item.id)
-          .related('categories')
-          .to('categories', categoryId)
-      );
-    });
-  }
-  return kew.all(promises);
-}
-
 router.get('/', function(req, res) {
-  db.list('denorm_categories')
+  db.list('denorm_categories', { limit: 100 })
     .then(function(results) {
       res.json(normalize(results.body.results));
     })
@@ -69,12 +45,7 @@ router.get('/:id', function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
-  var statusCode;
   db.put('categories', req.params.id, req.body)
-    .then(function(results) {
-      statusCode = results.statusCode;
-      return graphManyToMany(req.params.id, req.body.products);
-    })
     .then(function(results) {
       denorm_products.run({ collection: 'products' });
       denorm_categories.run({ collection: 'categories' });
@@ -91,9 +62,6 @@ router.post('/', function(req, res) {
     .then(function(results) {
       // get the key that orchestrate creates from the header
       req.body.id = results.headers.location.split('/')[3];
-      // TODO run this in parallel, there could be a lot of products which would hold up the
-      // post request
-      return graphManyToMany(req.body.id, req.body.products);
     })
     .then(function(results) {
       denorm_products.run({ collection: 'products' });
