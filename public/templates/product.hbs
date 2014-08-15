@@ -2,7 +2,12 @@
   <h1>{{name}}</h1>
   <p>{{product_data.model}}</p>
   <p>{{product_data.brand}}</p>
-  <p><span class="label label-default">{{category}}</span></p>
+  <h2>Categories</h2>
+  <ul>
+  {{#each categories}}
+    <li>{{id}}-{{name}}</li>
+  {{/each}}
+  </ul>
 
   <h2>Reviews</h2>
 

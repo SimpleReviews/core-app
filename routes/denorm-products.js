@@ -3,20 +3,11 @@ var kew = require('kew');
 var normalize = require('./normalize');
 
 orc_denorm.denormalize = function(db, path, item) {
-  var promises = [
-    db.newGraphReader()
-      .get()
-      .from(path.collection, path.key)
-      .related('categories'),
-    db.newGraphReader()
-      .get()
-      .from(path.collection, path.key)
-      .related('reviews')
-  ];
-
-  return kew.all(promises)
+  return db.newGraphReader()
+    .get()
+    .from(path.collection, path.key)
+    .related('reviews')
     .then(function(results) {
-      item.categories = normalize(results[0].body.results);
       item.reviews = normalize(results[1].body.results);
       return item;
     })
