@@ -4,20 +4,60 @@ var template = require('../../templates/product.hbs');
 module.exports = View.extend({
 
   events: {
-      'submit #form': 'handleSubmit'
+      'submit #add-positive': 'addPositive',
+      'submit #add-negative': 'addNegative'
   },
 
   template: template,
 
   initialize: function(options) {
-    console.log('product');
+    //console.log('product');
     //this.model.on('request', this.renderLoading, this);
     this.model.on('change', this.render, this);
-    console.log(this.model);
+    //console.log(this.model);
   },
 
-  handleSubmit: function(e) {
+  addPositive: function(e) {
+    var self = this;
     e.preventDefault();
-    console.log('clicked');
+    text = this.$el.find('#positive-input').val();
+    console.log(text);
+    $.ajax({
+        type: 'POST',
+        url: '/reviews',
+        data: {text:text},
+        success: function(data){
+            console.log('working....');
+        },
+        error: function(data){
+            console.log(data);
+        }
+    })
+    .done(function(res) {
+      console.log('res: ' + res.message);
+      for (var i in res){
+          console.log(i);
+      }
+      self.model.get('positiveReviews').push(res);
+      self.render();
+    });
+  },
+
+  addNegative: function(e) {
+    var self = this;
+    e.preventDefault();
+    console.log('clicked negative button');
+    $.ajax({
+        url: '/reviews',
+        type: 'POST',
+        data: {},
+        error: function(){
+        console.log('testingtestingtesting');
+        }
+    })
+    .done(function(res) {
+      self.model.get('positiveReviews').push(res);
+      self.render();
+    });
   }
 });
