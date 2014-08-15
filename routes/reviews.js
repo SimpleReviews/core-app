@@ -43,6 +43,11 @@ router.put('/:id', function(req, res) {
 router.post('/', function(req, res) {
   db.post('reviews', req.body)
     .then(function(results) {
+    console.log('start graph create');
+    console.log(res);
+    for (var restest in res){
+        console.log(restest);
+    }
       req.body.id = results.headers.location.split('/')[3];
       return db.newGraphBuilder()
         .create()
@@ -51,12 +56,13 @@ router.post('/', function(req, res) {
         .to('reviews', req.body.id);
     })
     .then(function() {
+    console.log(' start denorm');
       products_denorm.run({ collection: 'products' });
       res.json(req.body);
     })
     .fail(function(err) {
-      res.status(err.statusCode)
-        .json({ message: err.body.message });
+    console.log('end error');
+      res.json(err);
     });
 });
 
