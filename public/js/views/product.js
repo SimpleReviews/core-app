@@ -56,7 +56,7 @@ module.exports = View.extend({
         }
     })
     .done(function(res) {
-      self.model.get('positiveReviews').push(res);
+      self.model.get('negativeReviews').push(res);
       self.render();
     });
   }
