@@ -1,5 +1,6 @@
 body {
   padding-top: 50px;
+  font: 14px Helvetica, Arial, sans-serif;
 }
 
 body .navbar-brand {
@@ -11,4 +12,20 @@ body .navbar-brand {
   margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
+}
+
+.list-group-item {
+    font-weight:bold;
+    margin-bottom:5px;
+    border:0;
+}
+
+.badge {
+    color:#000;
+    background-color:#FFF;
+    border-radius:0;
+}
+
+.add-review {
+    width:100%;
 }

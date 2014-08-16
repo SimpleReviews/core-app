@@ -43,26 +43,33 @@ router.put('/:id', function(req, res) {
 router.post('/', function(req, res) {
   db.post('reviews', req.body)
     .then(function(results) {
-    console.log('start graph create');
-    console.log(res);
-    for (var restest in res){
-        console.log(restest);
-    }
       req.body.id = results.headers.location.split('/')[3];
+      req.key = results.headers.location.split('/')[3];
+      req.category = 'reviews';
+      console.log('ID: ' + req.body.id);
+      console.log('Prod: ' + req.body.product);
+      console.log('Body: '); 
+      for (var i in req.body){ 
+          console.log(i);
+      }
       return db.newGraphBuilder()
         .create()
-        .from('products', req.body.product_id)
+        .from('products', req.body.product)
         .related('reviews')
         .to('reviews', req.body.id);
     })
-    .then(function() {
-    console.log(' start denorm');
-      products_denorm.run({ collection: 'products' });
+    .then(function(results) {
+      products_denorm.run({ collection: 'reviews' });
       res.json(req.body);
+      console.log('Created: ' + results);
+      console.log(req.body);
+      for (var i in req.body){
+        console.log(i);
+      }
     })
     .fail(function(err) {
-    console.log('end error');
       res.json(err);
+      console.log('Failed: ' + err);
     });
 });
 
@@ -74,6 +81,7 @@ router.delete('/:id', function(req, res) {
     .fail(function(err) {
       res.status(err.statusCode)
         .json({ message: err.body.message });
+        console.log('Failed: ' + err);
     });
 });
 

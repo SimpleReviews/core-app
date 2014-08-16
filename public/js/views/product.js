@@ -25,7 +25,12 @@ module.exports = View.extend({
     $.ajax({
         type: 'POST',
         url: '/reviews',
-        data: {text:text},
+        data: {
+            text:text,
+            count: 1,
+            type: "positive",
+            product: this.model.get('id')
+        },
         success: function(data){
             console.log('working....');
         },
@@ -46,17 +51,26 @@ module.exports = View.extend({
   addNegative: function(e) {
     var self = this;
     e.preventDefault();
-    console.log('clicked negative button');
+    text = this.$el.find('#negative-input').val();
+    console.log(text);
     $.ajax({
         url: '/reviews',
         type: 'POST',
-        data: {},
-        error: function(){
-        console.log('testingtestingtesting');
+        data: {
+            text: text,
+            count: 1,
+            type: "negative",
+            product: this.model.get('id')
+        },
+        success: function(data){
+            console.log(data);
+        },
+        error: function(data){
+            console.log(data);
         }
     })
     .done(function(res) {
-      self.model.get('positiveReviews').push(res);
+      self.model.get('negativeReviews').push(res);
       self.render();
     });
   }

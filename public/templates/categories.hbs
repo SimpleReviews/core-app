@@ -1,8 +1,16 @@
 <div class="wrapper">
-  <h1>Categories</h1>
-  <ul>
-  {{#each}}
-    <li><a href="/#/categories/{{id}}">{{name}}</a></li>
-  {{/each}}
-  </ul>
+    <div class="jumbotron text-center">
+        <h1 class="lead">Non-boring reviews.</h1>
+        <p class="lead">Read a few bullet points, watch some videos and make a decision.</p>
+    </div>
+    <h1>Categories</h1>
+
+<div class="row">
+    {{#each}}
+    <div class="col-xs-6 col-md-3"> 
+        <a href="/#/categories/{{id}}"><h4>{{name}}</h4></a>
+    </div>
+    {{/each}}
+</div>
+
 </div>
