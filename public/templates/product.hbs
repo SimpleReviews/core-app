@@ -1,27 +1,31 @@
 <div class="wrapper">
-    <h1>{{name}}</h1>
-    <p>{{product_data.model}}</p>
-    <p>{{product_data.brand}}</p>
-    <p><span class="label label-default">{{category}}</span></p>
+    <h1>{{name}} <small>{{product_data.model}}</small></h1>
+    <a href="#/categories/{{category.id}}"><span class="label label-primary">{{category}}</span></a> 
+    <span class="label label-default">{{product_data.brand}}</span>
 
     <h2>Reviews</h2>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-6">
-                <h3 class="text-center">Positive</h3>
+            <div class="col-xs-6 text-center">
+                <img src="/img/positive.png" src="Positive">
+                <hr>
             </div> 
-            <div class="col-xs-6">
-                <h3 class="text-center">Negative</h3>
+            <div class="col-xs-6 text-center">
+                <img src="/img/negative.png" src="Negative">
+                <hr>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-6">
-                <ul id="positive">
+                <div id="positive" class="list-group">
                   {{#each positiveReviews}}
-                    <li>{{text}}</li>
+                    <a href="" class="list-group-item list-group-item-success">
+                        <span class="badge">{{count}}</span>
+                        {{text}}
+                    </a>
                   {{/each}}
-                </ul>
+                </div>
             </div>
             <div class="col-xs-6">
                 <ul id="negative">
@@ -34,13 +38,13 @@
         <div class="row">
             <div class="col-xs-6">
                 <form id='add-positive' class="form-inline text-center">
-                    <input type="text" name="text" class="form-control input-lg" id="positive-input" placeholder="Add a positive review">
+                    <input type="text" name="text" class="add-review form-control input-lg" id="positive-input" placeholder="Add a positive review">
                     <button id="add-positive" class="btn btn-default hide">Add</button>
                 </form>
             </div>
             <div class="col-xs-6">
-                <form id='add-negative' class="form-inline text-center">
-                    <input type="text" name="text" class="form-control input-lg" id="negative-input" placeholder="Add a negative review">
+                <form id='add-negative' class="add-review form-inline text-center">
+                    <input type="text" name="text" class="add-review form-control input-lg" id="negative-input" placeholder="Add a negative review">
                     <button type="submit" class="btn btn-default hide">Add</button>
                 </form>
             </div>
