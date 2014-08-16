@@ -43,18 +43,20 @@ router.put('/:id', function(req, res) {
 router.post('/', function(req, res) {
   db.post('reviews', req.body)
     .then(function(results) {
-      req.body.key = results.headers.location.split('/')[3];
-      req.body.category = 'reviews';
-      console.log('ID: ' + req.body.key);
+      req.body.id = results.headers.location.split('/')[3];
+      req.key = results.headers.location.split('/')[3];
+      req.category = 'reviews';
+      console.log('ID: ' + req.body.id);
+      console.log('Prod: ' + req.body.product);
       console.log('Body: '); 
       for (var i in req.body){ 
           console.log(i);
       }
       return db.newGraphBuilder()
         .create()
-        .from('products', req.body.product_id)
+        .from('products', req.body.product)
         .related('reviews')
-        .to('reviews', req.body.key);
+        .to('reviews', req.body.id);
     })
     .then(function(results) {
       products_denorm.run({ collection: 'products' });
