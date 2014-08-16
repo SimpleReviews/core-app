@@ -59,9 +59,13 @@ router.post('/', function(req, res) {
         .to('reviews', req.body.id);
     })
     .then(function(results) {
-      products_denorm.run({ collection: 'products' });
+      products_denorm.run({ collection: 'reviews' });
       res.json(req.body);
       console.log('Created: ' + results);
+      console.log(req.body);
+      for (var i in req.body){
+        console.log(i);
+      }
     })
     .fail(function(err) {
       res.json(err);

@@ -1,8 +1,20 @@
 <div class="wrapper">
-  <h1>Categories</h1>
-  <ul>
-  {{#each}}
-    <li><a href="/#/categories/{{id}}">{{name}}</a></li>
-  {{/each}}
-  </ul>
+    <div class="jumbotron">
+        <h1>Some nice catch phrase.</h1>
+        <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac scelerisque quam, ut lobortis nisi. In feugiat erat quis augue semper iaculis. Integer convallis erat ut lacus scelerisque pretium. Nullam pretium sed augue id pretium. Phasellus ac dapibus elit. Duis. 
+        </p>
+    </div>
+    <h1>Categories</h1>
+
+<div class="row">
+    {{#each}}
+    <div class="col-xs-6 col-md-3"> 
+        <a href="/#/categories/{{id}}">
+            <h5>{{name}}</h5>
+        </a>
+    </div>
+    {{/each}}
+</div>
+
 </div>
