@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var config = require('../config.js');
+var config = require('../config');
 var db = require('orchestrate')(config.dbKey);
-var normalize = require('./normalize.js');
-var denorm_products = require('./denorm-products');
-var denorm_categories = require('./denorm-categories');
-var kew = require('kew');
+var normalize = require('../lib/normalize');
 
 router.get('/', function(req, res) {
   db.list('denorm_categories', { limit: 100 })
@@ -47,8 +44,6 @@ router.get('/:id', function(req, res) {
 router.put('/:id', function(req, res) {
   db.put('categories', req.params.id, req.body)
     .then(function(results) {
-      denorm_products.run({ collection: 'products' });
-      denorm_categories.run({ collection: 'categories' });
       res.status(statusCode).end();
     })
     .fail(function(err) {
@@ -64,8 +59,6 @@ router.post('/', function(req, res) {
       req.body.id = results.headers.location.split('/')[3];
     })
     .then(function(results) {
-      denorm_products.run({ collection: 'products' });
-      denorm_categories.run({ collection: 'categories' });
       res.json(req.body);
     })
     .fail(function(err) {

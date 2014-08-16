@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var config = require('../config.js');
+var config = require('../config');
 var db = require('orchestrate')(config.dbKey);
-var normalize = require('./normalize.js');
-var denorm_products = require('./denorm-products');
-var denorm_categories = require('./denorm-categories');
+var normalize = require('../lib/normalize');
+var denorm = require('../lib/denorm')();
 var kew = require('kew');
 
 router.get('/', function(req, res) {
@@ -43,37 +42,16 @@ router.put('/:id', function(req, res) {
 });
 
 router.post('/', function(req, res) {
+  console.log(req.body)
   db.post('products', req.body)
     .then(function(results) {
-      var promises = [];
       // get the key that orchestrate creates from the header
       req.body.id = results.headers.location.split('/')[3];
-
-      if (req.body.category) {
-        return db.post('categories', {
-          name: req.body.category
-        });
-      }
-
-      return kew.reject('missing category');
-    })
-    .then(function(results) {
-      return db.newGraphBuilder()
-        .create()
-        .from('categories', results.headers.location.split('/')[3])
-        .related('products')
-        .to('products', req.body.id)
-    })
-    .then(function(results) {
-      denorm_products.run({ collection: 'products' });
-      denorm_categories.run({ collection: 'categories' });
+      findOrCreateCategory(req.body.category, req.body.id);
+      // send the product back to the client
       res.json(req.body);
     })
     .fail(function(err) {
-      if (!err.statusCode) {
-        res.status(404).json({ message: err });
-      }
-
       res.status(err.statusCode)
         .json({ message: err.body.message });
     });
@@ -91,5 +69,43 @@ router.delete('/:id', function(req, res) {
         .json({ message: err.body.message });
     });
 });
+
+function findOrCreateCategory(name, productId) {
+  console.log(name);
+  var categoryId;
+  db.search('categories', 'value.name:' + '"' + name + '"')
+    .then(function(results) {
+      console.log('1');
+      // if it doesn't exist, create a new category
+      if (!results.body.results.length && name) {
+        return db.post('categories', { name: name });
+      }
+      // if it does, return the existing category's key
+      return results.body.results[0].path.key;
+    })
+    .then(function(results) {
+      if (results.headers) {
+        categoryId = results.headers.location.split('/')[3];
+      } else {
+        categoryId = results;
+      }
+      // create a graph between categories and products
+      return db.newGraphBuilder()
+        .create()
+        .from('categories',  categoryId)
+        .related('products')
+        .to('products', productId)
+    })
+    .then(function() {
+      console.log('3');
+      // denormalize the categories and products collections
+      denorm.run('products', productId);
+      denorm.run('categories', categoryId);
+    })
+    .fail(function(err) {
+      console.log('4');
+      throw err;
+    });
+}
 
 module.exports = router;

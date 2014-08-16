@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var config = require('../config.js');
+var config = require('../config');
 var db = require('orchestrate')(config.dbKey);
-var normalize = require('./normalize.js');
-var products_denorm = require('./denorm-products');
+var denorm = require('../lib/denorm')();
+var normalize = require('../lib/normalize');
 var kew = require('kew');
 
 router.get('/', function(req, res) {
@@ -48,8 +48,8 @@ router.post('/', function(req, res) {
       req.category = 'reviews';
       console.log('ID: ' + req.body.id);
       console.log('Prod: ' + req.body.product);
-      console.log('Body: '); 
-      for (var i in req.body){ 
+      console.log('Body: ');
+      for (var i in req.body){
           console.log(i);
       }
       return db.newGraphBuilder()
@@ -59,7 +59,7 @@ router.post('/', function(req, res) {
         .to('reviews', req.body.id);
     })
     .then(function(results) {
-      products_denorm.run({ collection: 'reviews' });
+      denorm.run('products', req.body.product);
       res.json(req.body);
       console.log('Created: ' + results);
       console.log(req.body);
