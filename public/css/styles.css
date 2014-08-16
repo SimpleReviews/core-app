@@ -29,3 +29,16 @@ body .navbar-brand {
 .add-review {
     width:100%;
 }
+
+.jumbotron {
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.jumbotron {
+    margin-bottom: 40px;
+    color: #2A363B;
+    background-color: #f9f9f9;
+    border-radius: 0px;
+    margin: 40px;
+}

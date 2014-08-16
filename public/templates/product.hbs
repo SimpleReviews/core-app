@@ -3,8 +3,6 @@
     <a href="#/categories/{{category.id}}"><span class="label label-primary">{{category}}</span></a> 
     <span class="label label-default">{{product_data.brand}}</span>
 
-    <h2>Reviews</h2>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-6 text-center">
@@ -19,6 +17,11 @@
         <div class="row">
             <div class="col-xs-6">
                 <div id="positive" class="list-group">
+                    <a href="" class="list-group-item">
+                        <span class="badge"><h3>#</h3></span>
+                        <h3>Positive Reviews</h3>
+                    </a>
+
                   {{#each positiveReviews}}
                     <a href="" class="list-group-item list-group-item-success">
                         <span class="badge">{{count}}</span>
@@ -28,11 +31,19 @@
                 </div>
             </div>
             <div class="col-xs-6">
-                <ul id="negative">
-                    {{#each negativeReviews}}
-                        <li>{{text}}</li>
-                    {{/each}}
-                </ul>
+                <div id="negative" class="list-group">
+                    <a href="" class="list-group-item">
+                        <span class="badge"><h3>#</h3></span>
+                        <h3>Negative Reviews</h3>
+                    </a>
+
+                  {{#each negativeReviews}}
+                    <a href="" class="list-group-item list-group-item-danger">
+                        <span class="badge">{{count}}</span>
+                        {{text}}
+                    </a>
+                  {{/each}}
+                </div>
             </div>
         </div>
         <div class="row">
