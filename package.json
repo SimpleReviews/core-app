@@ -23,9 +23,7 @@
     "kew": "~0.4.0",
     "lodash": "~2.4.1",
     "semantics3-node": "0.0.1",
-    "spin.js": "~2.0.1"
-  },
-  "devDependencies": {
+    "spin.js": "~2.0.1",
     "browserify": "~5.9.1"
   }
 }
