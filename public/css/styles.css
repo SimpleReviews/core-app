@@ -81,3 +81,50 @@ body h1 {
   float: left;
   padding-right: 20px;
 }
+
+#positive-input, #negative-input{
+    background-color:#2A363B;
+    color:#fff;
+    border-radius:0;
+    width: 100%;
+    text-align: center;
+    font-size:1.5em;
+    cursor: pointer; 
+    font-weight:200;
+}
+
+#positive-input:focus, #negative-input:focus{
+    background-color:#fff;
+    color:#2A363B;
+    border-color: #66AFE9;
+    font-weight:100;
+    cursor: text; 
+    outline: 0px none;
+}
+
+.media-wrapper { 
+    margin: auto; 
+    text-align: center; 
+    position: relative;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 20px !important;
+    width: 100%;
+    padding-top: 5px;
+    }
+.scrolls { 
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 150px;
+    white-space:nowrap
+} 
+.imageDiv img { 
+    margin: 2px;
+    max-height: 150px;
+    cursor: pointer;
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+    vertical-align:top;
+}
