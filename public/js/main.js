@@ -30,6 +30,7 @@ var Router = Backbone.Router.extend({
   },
   categories: function() {
     var self = this;
+    this.appView.showSpinner();
     this.categories.fetch().then(function() {
       self.renderDetail(new CategoriesView({ collection: self.categories }));
     });
