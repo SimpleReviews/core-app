@@ -81,3 +81,23 @@ body h1 {
   float: left;
   padding-right: 20px;
 }
+
+#positive-input, #negative-input{
+    background-color:#2A363B;
+    color:#fff;
+    border-radius:0;
+    width: 100%;
+    text-align: center;
+    font-size:1.5em;
+    cursor: pointer; 
+    font-weight:200;
+}
+
+#positive-input:focus, #negative-input:focus{
+    background-color:#fff;
+    color:#2A363B;
+    border-color: #66AFE9;
+    font-weight:100;
+    cursor: text; 
+    outline: 0px none;
+}
