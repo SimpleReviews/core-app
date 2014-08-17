@@ -1,3 +1,12 @@
 language: node_js
 node_js:
-  - "0.11"
+- '0.11'
+deploy:
+  provider: heroku
+  api_key:
+    secure: UQ10ugBcXjzPBb7ptJhdI2EKvqHVGGGIPQdNu5zF5GcgtIF/rgLE73hBkyKXjQRNd4eBBZ44qI60Qh5C2zu1r/NNNc6thgh+BuozC6muBABvZ7oH3DNqkQ5Wg4jGTuHYTxaYJJ3fH05vn/DHFtgkG5QdUDgIHsNGGm5FowPiexw=
+  app: simple-reviews
+  on:
+    repo: SimpleReviews/core-app
+  run:
+    'bin/build'
