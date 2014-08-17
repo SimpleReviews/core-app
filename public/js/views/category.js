@@ -6,7 +6,5 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('category');
-    //this.model.on('request', this.renderLoading, this);
-    this.model.on('change', this.render, this);
   }
 });
