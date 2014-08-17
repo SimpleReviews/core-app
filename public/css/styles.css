@@ -96,8 +96,8 @@ body h1 {
 #positive-input:focus, #negative-input:focus{
     background-color:#fff;
     color:#2A363B;
+    border-color: #66AFE9;
     cursor: text; 
     font-weight:100;
-    border-color: #66AFE9;
     outline: 0px none;
 }
