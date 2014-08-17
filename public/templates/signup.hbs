@@ -1,0 +1,36 @@
+<div class="wrapper">
+  {{#if error.message}}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      {{error.message}}
+    </div>
+  {{/if}}
+  <div class="auth-form">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sign up</h3>
+      </div>
+      <div class="panel-body">
+          <form role="form">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" value="{{model.username}}"/>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" class="form-control" id="email" value="{{model.email}}"/>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" value="{{model.password}}"/>
+            </div>
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" class="form-control" id="confirm-password" value="{{model.confirmPassword}}"/>
+            </div>
+            <input type="submit" class="btn btn-success" value="Create an account">
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
