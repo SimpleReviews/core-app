@@ -1,0 +1,2 @@
+#!/bin/sh
+./node_modules/browserify/bin/cmd.js --t hbsfy public/js/main.js -o public/bundle.js
