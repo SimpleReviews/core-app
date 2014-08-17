@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var config = require('../config');
-var api_key = config.semantics_api.api_key;
-var api_secret = config.semantics_api.api_secret;
-var sem3 = require('semantics3-node')(api_key,api_secret);
+var api_key = process.env.SEMANTICS3_API_KEY;
+var api_secret = process.env.SEMANTICS3_API_SECRET;
+var sem3 = require('semantics3-node')(api_key, api_secret);
 
 router.get('/search', function(req, res) {
   var query = req.query.q;

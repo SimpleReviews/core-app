@@ -4,8 +4,6 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var config = require('./config.js');
-var db = require('orchestrate')(config.dbKey);
 
 var categories = require('./routes/categories');
 var products = require('./routes/products');
