@@ -41,7 +41,8 @@ module.exports = View.extend({
         for (var i in res){
             var url = res[i].link;
             var thumbnail = res[i].images.thumbnail.url;
-            $('#instagram').prepend('<a href="' + url + '"><img src="' + thumbnail + '" width="150" height="150"></a>');
+            var alt = res[i].caption;
+            $('#instagram').prepend('<a href="' + url + '"><img src="' + thumbnail + '" alt="' + alt + '" width="150" height="150"></a>');
         }
       }
     });
