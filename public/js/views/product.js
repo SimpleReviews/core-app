@@ -11,10 +11,7 @@ module.exports = View.extend({
   template: template,
 
   initialize: function(options) {
-    //console.log('product');
-    //this.model.on('request', this.renderLoading, this);
-    this.model.on('change', this.render, this);
-    //console.log(this.model);
+    console.log('product');
   },
 
   addPositive: function(e) {

@@ -7,6 +7,10 @@ body .navbar-brand {
   padding: 15px 0px;
 }
 
+body h1 {
+  margin-bottom: 20px;
+}
+
 .wrapper {
   width: 860px;
   margin: 0 auto;
@@ -41,4 +45,39 @@ body .navbar-brand {
     background-color: #f9f9f9;
     border-radius: 0px;
     margin: 40px;
+}
+
+.spin {
+  position: fixed;
+  z-index: 999;
+  height: 0px;
+  width: 0px;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.form-control.categories-search {
+  font-size: 18px;
+  margin-bottom: 40px;
+  display: block;
+}
+
+.category-name {
+  font-size: 24px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.halves {
+  margin-right: -20px;
+}
+
+.grid-cell {
+  width: 50%;
+  float: left;
+  padding-right: 20px;
 }

@@ -30,20 +30,27 @@ var Router = Backbone.Router.extend({
   },
   categories: function() {
     var self = this;
+    this.appView.showSpinner();
     this.categories.fetch().then(function() {
       self.renderDetail(new CategoriesView({ collection: self.categories }));
     });
   },
   category: function(id) {
-    var category = this.categories.getOrFetch(id);
-    this.renderDetail(new CategoryView({ model: category }));
+    var self = this;
+    this.appView.showSpinner();
+    this.categories.getOrFetch(id).then(function(category) {
+      self.renderDetail(new CategoryView({ model: category }));
+    });
   },
   categoryNew: function() {
     this.renderDetail(new CategoryNewView({ collection: this.categories }));
   },
   product: function(id) {
-    var product = this.products.getOrFetch(id);
-    this.renderDetail(new ProductView({ model: product }));
+    var self = this;
+    this.appView.showSpinner();
+    this.products.getOrFetch(id).then(function(product) {
+      self.renderDetail(new ProductView({ model: product }));
+    });
   },
   productNew: function() {
     this.renderDetail(new ProductNewView({ collection: this.products }));
