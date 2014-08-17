@@ -81,3 +81,8 @@ body h1 {
   float: left;
   padding-right: 20px;
 }
+
+.auth-form {
+  width: 400px;
+  margin: 60px auto;
+}
