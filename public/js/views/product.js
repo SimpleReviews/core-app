@@ -30,6 +30,21 @@ module.exports = View.extend({
         }
       }
     });
+    $.ajax({
+      url: '/instagram/recent?q=blackandwhite',
+      type: 'GET',
+      error: function() {
+      },
+      success: function(res) {
+        console.log(res);
+        console.log(res[0].url);
+        for (var i in res){
+            var url = res[i].link;
+            var thumbnail = res[i].images.thumbnail.url;
+            $('#instagram').prepend('<a href="' + url + '"><img src="' + thumbnail + '" width="150" height="150"></a>');
+        }
+      }
+    });
   },
 
   addPositive: function(e) {

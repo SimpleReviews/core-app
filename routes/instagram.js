@@ -8,7 +8,7 @@ insta.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
 router.get('/recent', function(req, res) {
     insta.tags.recent({
         name: req.query.q,
-        count: 5,
+        count: 15,
         complete: function(data){
             res.json(data);
         },
