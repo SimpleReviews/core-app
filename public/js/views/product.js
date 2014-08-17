@@ -12,6 +12,21 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('product');
+    $.ajax({
+      url: '/youtube/search?q='+this.model.get('name'),
+      type: 'GET',
+      error: function() {
+      },
+      success: function(res) {
+        console.log(res);
+        console.log(res[0].url);
+        for (var i in res){
+            var url = res[i].url;
+            var thumbnail = res[i].thumbnails[0].url;
+            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" width="250" height="150"></a>');
+        }
+      }
+    });
   },
 
   addPositive: function(e) {
