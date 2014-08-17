@@ -12,6 +12,9 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('product');
+  },
+
+  afterRender: function() {
     $.ajax({
       url: '/youtube/search?q='+this.model.get('name'),
       type: 'GET',
