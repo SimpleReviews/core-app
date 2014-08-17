@@ -31,7 +31,7 @@ module.exports = View.extend({
       }
     });
     $.ajax({
-      url: '/instagram/recent?q=blackandwhite',
+      url: '/instagram/recent?q='+this.model.get('hashtag'),
       type: 'GET',
       error: function() {
       },
