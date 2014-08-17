@@ -10,6 +10,7 @@ var products = require('./routes/products');
 var reviews = require('./routes/reviews');
 var semantics3 = require('./routes/semantics3');
 var youtube = require('./routes/youtube');
+var instagram = require('./routes/instagram');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/products/', products);
 app.use('/reviews/', reviews);
 app.use('/semantics3/', semantics3);
 app.use('/youtube/', youtube);
+app.use('/instagram/', instagram);
 
 app.use('/', function(req, res) {
   res.sendfile('public/index.html');
