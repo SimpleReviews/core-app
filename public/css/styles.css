@@ -139,3 +139,25 @@ body .alert {
     *zoom:1;
     vertical-align:top;
 }
+
+.product-media{
+    position:relative;
+    display:inline-block;
+    padding-bottom:30px;
+}
+
+.product-caption{
+    background:rgba(255,255,255, .75);
+    color:#000;
+    font-family:Helvetica;
+    font-size:1em;
+    width:100%;
+    font-weight:600;
+    position:absolute;
+    top: 0;
+    padding:1ex;
+}
+
+.product-tile img{
+    max-width: 100%;
+}

@@ -26,7 +26,7 @@ module.exports = View.extend({
         for (var i in res){
             var url = res[i].url;
             var thumbnail = res[i].thumbnails[0].url;
-            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" width="250" height="150"></a>');
+            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" height="150"></a>');
         }
       }
     });
