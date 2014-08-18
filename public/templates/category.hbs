@@ -1,8 +1,17 @@
 <div class="wrapper">
   <h1>{{name}}</h1>
-  <ul>
-  {{#each products}}
-    <li><a href="/#/products/{{id}}">{{name}}</a></li>
-  {{/each}}
-  </ul>
+
+    <div class="row product-tile">
+      {{#each products}}
+        <div class="col-xs-6 col-md-3 product-media"> 
+            <a href="/#/products/{{id}}">
+                <img src="{{images.0.images.low_resolution.url}}">
+                <div class="product-caption">
+                    {{name}}
+                </div>
+            </a>
+        </div>
+      {{/each}}
+    </div>
+
 </div>

@@ -85,21 +85,42 @@ module.exports = View.extend({
 
   handleSubmit: function(e) {
     e.preventDefault();
+    var self = this;
     var product = this.searchResults[this.$el.find('#name').val()];
-    var insta = this.instaResults[this.$el.find('#insta').val()];
-
-    this.collection.create({
-      name: product.name,
-      product_data: product,
-      category: product.category,
-      hashtag: insta.name
-    }, {
-      success: function(model) {
-        window.app.navigate('/products/' + model.get('id'), { trigger: true });
+    var insta = this.$el.find('#insta').val();
+    var images;
+    
+    $.ajax({
+      url: '/instagram/recent?q=' + insta,
+      type: 'GET',
+      error: function(err) {
+        console.log('error retreiving images ' + err);
+        return err;
       },
-      error: function(model, xhr) {
-        console.error(xhr);
+      success: function(res) {
+        images = res;
+        //return res[0].images.low_resolution.url;
+
+        self.collection.create({
+          name: product.name,
+          product_data: product,
+          category: product.category,
+          hashtag: insta,
+          test: 'test',
+          images: images 
+        }, {
+          success: function(model) {
+            window.app.navigate('/products/' + model.get('id'), { trigger: true });
+          },
+          error: function(model, xhr) {
+            console.error(xhr);
+          }
+        });
+
+
       }
     });
+
+
   }
 });
