@@ -14,6 +14,40 @@ module.exports = View.extend({
     console.log('product');
   },
 
+  afterRender: function() {
+    $.ajax({
+      url: '/youtube/search?q='+this.model.get('name'),
+      type: 'GET',
+      error: function() {
+      },
+      success: function(res) {
+        console.log(res);
+        console.log(res[0].url);
+        for (var i in res){
+            var url = res[i].url;
+            var thumbnail = res[i].thumbnails[0].url;
+            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" width="250" height="150"></a>');
+        }
+      }
+    });
+    $.ajax({
+      url: '/instagram/recent?q='+this.model.get('hashtag'),
+      type: 'GET',
+      error: function() {
+      },
+      success: function(res) {
+        console.log(res);
+        console.log(res[0].url);
+        for (var i in res){
+            var url = res[i].link;
+            var thumbnail = res[i].images.thumbnail.url;
+            var alt = res[i].caption;
+            $('#instagram').prepend('<a href="' + url + '"><img src="' + thumbnail + '" alt="' + alt + '" width="150" height="150"></a>');
+        }
+      }
+    });
+  },
+
   addPositive: function(e) {
     var self = this;
     e.preventDefault();
