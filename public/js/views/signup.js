@@ -73,6 +73,5 @@ module.exports = View.extend({
           self.render();
         });
     }
-
   }
 });
