@@ -11,6 +11,10 @@ body h1 {
   margin-bottom: 20px;
 }
 
+body .alert {
+  margin-top: 20px;
+}
+
 .wrapper {
   width: 860px;
   margin: 0 auto;

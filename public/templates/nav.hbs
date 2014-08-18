@@ -7,11 +7,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/"><img src="/img/small.png" alt="Simple Reviews"></a>
+      <a class="navbar-brand" href="#"><img src="/img/small.png" alt="Simple Reviews"></a>
     </div>
     <div class="navbar-collapse collapse" style="height: 1px;">
       <ul class="nav navbar-nav pull-right">
-        <li><a href="/#/signin">Sign in</a></li>
+        {{#if currentUser}}
+          <li><a href="#">{{currentUser.email}}</a></li>
+        {{else}}
+          <li><a href="/#/signin">Sign in</a></li>
+        {{/if}}
       </ul>
     </div>
   </div>
