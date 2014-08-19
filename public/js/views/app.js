@@ -28,12 +28,17 @@ module.exports = View.extend({
 
   renderNavView: function() {
     this.navView = new NavView();
-    this.navView.setElement(this.$('#nav'));
     this.navView.render();
+    this.$('#nav').html(this.navView.el);
   },
 
   renderChildView: function(view) {
-    view.setElement(this.$('#detail'));
-    view.render();
+    if (this.currentView){
+      this.currentView.remove();
+    }
+
+    this.currentView = view;
+    this.currentView.render();
+    this.$('#detail').html(this.currentView.el);
   }
 });
