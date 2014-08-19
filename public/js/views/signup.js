@@ -63,10 +63,10 @@ module.exports = View.extend({
       confirmPassword: this.$('#confirm-password').val()
     });
 
-    if(this.model.isValid()) {
+    if(!!this.model.isValid()) {
       Auth.signup(this.model.toJSON())
         .then(function() {
-          window.app.navigate('/', { trigger: true });
+          window.app.navigate('/#/', { trigger: true });
         })
         .fail(function(err) {
           self.error = err;
