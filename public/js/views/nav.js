@@ -4,6 +4,10 @@ var Auth = require('../models/auth');
 
 module.exports = View.extend({
 
+  events: {
+    'click #signout': 'signout'
+  },
+
   template: template,
 
   initialize: function(options) {
@@ -21,6 +25,10 @@ module.exports = View.extend({
       isAuthenticated: Auth.loggedIn,
       currentUser: this.currentUser
     }
+  },
+
+  signout: function() {
+    Auth.close();
   }
 
 });
