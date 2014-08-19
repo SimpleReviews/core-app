@@ -5,7 +5,7 @@ var Auth = require('../models/auth');
 module.exports = View.extend({
 
   events: {
-    'submit': 'handleSubmit'
+    'submit #signup-form': 'handleSubmit'
   },
 
   template: template,

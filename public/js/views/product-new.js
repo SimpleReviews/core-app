@@ -4,7 +4,7 @@ var template = require('../../templates/product-new.hbs');
 module.exports = View.extend({
 
   events: {
-    'submit': 'handleSubmit'
+    'submit #product-form': 'handleSubmit'
   },
 
   template: template,
@@ -17,7 +17,7 @@ module.exports = View.extend({
 
   afterRender: function() {
     var self = this;
-    
+
     $('#insta').selectize({
       valueField: 'name',
       labelField: 'name',
@@ -89,7 +89,7 @@ module.exports = View.extend({
     var product = this.searchResults[this.$el.find('#name').val()];
     var insta = this.$el.find('#insta').val();
     var images;
-    
+
     $.ajax({
       url: '/instagram/recent?q=' + insta,
       type: 'GET',
@@ -107,7 +107,7 @@ module.exports = View.extend({
           category: product.category,
           hashtag: insta,
           test: 'test',
-          images: images 
+          images: images
         }, {
           success: function(model) {
             window.app.navigate('/products/' + model.get('id'), { trigger: true });
