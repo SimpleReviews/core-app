@@ -36,7 +36,7 @@ module.exports = View.extend({
 
     Auth.open(email, password)
       .then(function() {
-        window.app.navigate('/', { trigger: true });
+        window.app.navigate('/#/', { trigger: true });
       })
       .fail(function(err) {
         console.log(err)
