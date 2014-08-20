@@ -11,6 +11,8 @@ var reviews = require('./routes/reviews');
 var semantics3 = require('./routes/semantics3');
 var youtube = require('./routes/youtube');
 var instagram = require('./routes/instagram');
+var users = require('./routes/users');
+var session = require('./routes/session');
 
 var app = express();
 
@@ -25,13 +27,14 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use('/categories/', categories);
 app.use('/products/', products);
 app.use('/reviews/', reviews);
 app.use('/semantics3/', semantics3);
 app.use('/youtube/', youtube);
 app.use('/instagram/', instagram);
+app.use('/users', users);
+app.use('/', session);
 
 app.use('/', function(req, res) {
   res.sendfile('public/index.html');

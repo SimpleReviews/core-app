@@ -13,6 +13,9 @@ var ProductView = require('./views/product');
 var ProductNewView = require('./views/product-new');
 var Product = require('./models/product');
 var Category = require('./models/category');
+var SigninView = require('./views/signin');
+var SignupView = require('./views/signup');
+var User = require('./models/user');
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -21,6 +24,8 @@ var Router = Backbone.Router.extend({
     'categories/:id': 'category',
     'products/new': 'productNew',
     'products/:id': 'product',
+    'signin': 'signin',
+    'signup': 'signup',
     '*notFound': 'notFound'
   },
   initialize: function() {
@@ -54,6 +59,12 @@ var Router = Backbone.Router.extend({
   },
   productNew: function() {
     this.renderDetail(new ProductNewView({ collection: this.products }));
+  },
+  signin: function() {
+    this.renderDetail(new SigninView());
+  },
+  signup: function() {
+    this.renderDetail(new SignupView({ model: new User() }));
   },
   renderDetail: function(view) {
     this.appView.renderChildView(view);

@@ -4,7 +4,7 @@ var template = require('../../templates/product-new.hbs');
 module.exports = View.extend({
 
   events: {
-    'submit': 'handleSubmit'
+    'submit #product-form': 'handleSubmit'
   },
 
   template: template,
@@ -17,7 +17,7 @@ module.exports = View.extend({
 
   afterRender: function() {
     var self = this;
-    
+
     $('#insta').selectize({
       valueField: 'name',
       labelField: 'name',
@@ -49,8 +49,6 @@ module.exports = View.extend({
         });
       },
       onChange: function(tagname){
-
-
         $.ajax({
           url: '/instagram/recent?q=' + tagname,
           type: 'GET',
@@ -72,16 +70,6 @@ module.exports = View.extend({
             $("select").imagepicker();
           }
         });
-
-
-
-
-
-
-
-        //$('#photo-selector').html(function(){
-            //return tagname;
-        //});
       }
     });
 
@@ -123,7 +111,6 @@ module.exports = View.extend({
     var self = this;
     var product = this.searchResults[this.$el.find('#name').val()];
     var insta = this.$el.find('#insta').val();
-    
     self.collection.create({
       name: product.name,
       product_data: product,
