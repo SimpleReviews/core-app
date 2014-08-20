@@ -47,6 +47,29 @@ module.exports = View.extend({
             });
           }
         });
+      },
+      onChange: function(tagname){
+        $.ajax({
+          url: '/instagram/recent?q=' + tagname,
+          type: 'GET',
+          error: function(err) {
+            console.log('error retreiving images ' + err);
+            return err;
+          },
+          success: function(res) {
+            images = res;
+            $('#photo-selector').html(function(){
+                console.log(images);
+                var html = '<label for="insta">Select product photo</label><select class="image-picker show-html">';
+                for (var image in images){
+                    html += '<option data-img-src="' + images[image].images.thumbnail.url + '" value="' + image + '">' + image + '</option>';
+                }
+                html += '</select>';
+                return html; 
+            });
+            $("select").imagepicker();
+          }
+        });
       }
     });
 
@@ -88,39 +111,20 @@ module.exports = View.extend({
     var self = this;
     var product = this.searchResults[this.$el.find('#name').val()];
     var insta = this.$el.find('#insta').val();
-    var images;
-
-    $.ajax({
-      url: '/instagram/recent?q=' + insta,
-      type: 'GET',
-      error: function(err) {
-        console.log('error retreiving images ' + err);
-        return err;
+    self.collection.create({
+      name: product.name,
+      product_data: product,
+      category: product.category,
+      hashtag: insta,
+      thumbnail: $("div.thumbnail.selected img.image_picker_image").attr('src'),
+      },{
+      success: function(model) {
+        window.app.navigate('/products/' + model.get('id'), { trigger: true });
       },
-      success: function(res) {
-        images = res;
-        //return res[0].images.low_resolution.url;
-
-        self.collection.create({
-          name: product.name,
-          product_data: product,
-          category: product.category,
-          hashtag: insta,
-          test: 'test',
-          images: images
-        }, {
-          success: function(model) {
-            window.app.navigate('/products/' + model.get('id'), { trigger: true });
-          },
-          error: function(model, xhr) {
-            console.error(xhr);
-          }
-        });
-
-
+      error: function(model, xhr) {
+        console.error(xhr);
       }
     });
-
 
   }
 });

@@ -16,7 +16,7 @@ module.exports = View.extend({
 
   afterRender: function() {
     $.ajax({
-      url: '/youtube/search?q='+this.model.get('name'),
+      url: '/youtube/search?q='+this.model.get('name').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," "),
       type: 'GET',
       error: function() {
       },
