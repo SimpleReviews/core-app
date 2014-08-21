@@ -1,14 +1,21 @@
 <div class="wrapper">
     <div class="jumbotron text-center">
-        <h1 class="lead">Non-boring reviews.</h1>
+        <h1 class="lead">No more boring reviews.</h1>
         <p class="lead">Read a few bullet points, watch some videos and make a decision.</p>
+            <div class="input-group" id="catSearch">
+                <input type="text" class="form-control" id="jumbSearch" placeholder ="Search...">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="jSearchGo">Go!</button>
+                </span>
+            </div>
     </div>
+    
     <h1>Categories</h1>
 
 <div class="row">
     {{#each}}
     <div class="col-xs-6 col-md-3"> 
-        <a href="/#/categories/{{id}}"><h4>{{name}}</h4></a>
+        <a href="/#/categories/{{id}}"><h4 class="categories-hyper">{{name}}</h4></a>
     </div>
     {{/each}}
 </div>
