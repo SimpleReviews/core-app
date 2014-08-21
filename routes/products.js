@@ -19,6 +19,7 @@ router.get('/', function(req, res) {
 router.get('/:id', function(req, res) {
   db.get('denorm_products', req.params.id)
     .then(function(results) {
+      results.body.id = req.params.id;
       res.json(results.body);
     })
     .fail(function(err) {
