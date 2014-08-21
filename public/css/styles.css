@@ -1,6 +1,7 @@
 body {
   padding-top: 50px;
   font: 14px Helvetica, Arial, sans-serif;
+  background-color:#E9E9E9;
 }
 
 body .navbar-brand {
@@ -52,7 +53,7 @@ body .alert {
     margin-bottom: 40px;
     color: #2A363B;
     background-color: #2A363B;
-    color:white;
+    color:#E9E9E9;
     border-radius: 7px;
     margin: 40px;
     /*box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(0, 0, 0, 0.1);*/
@@ -211,22 +212,25 @@ body .alert {
     position:relative;
 }
 
-h4.categories-hyper a{
-    color:#E8495F;
+a {
+    color:#E28FA3;
 }
 
-h4.categories-hyper a:active{
-    color:#E8495F;
+div.col-xs-6 col-md-3 a{
+    margin:10px;   
 }
 
-h4.categories-hyper a:visited{
-    color:#E8495F;
+.categories-hyper {
+    margin:10px;
 }
 
+.row {
+    margin:5%;
+}
 
-
-
-
+h4 {
+    margin:10px;
+}
 
 
 
