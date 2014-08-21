@@ -15,6 +15,11 @@ body .alert {
   margin-top: 20px;
 }
 
+.navbar {
+    margin:0px;
+    box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
 .wrapper {
   width: 860px;
   margin: 0 auto;
@@ -40,15 +45,17 @@ body .alert {
 
 .jumbotron {
     padding-top: 10px;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 }
 
 .jumbotron {
     margin-bottom: 40px;
     color: #2A363B;
-    background-color: #f9f9f9;
-    border-radius: 0px;
+    background-color: #2A363B;
+    color:white;
+    border-radius: 7px;
     margin: 40px;
+    /*box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(0, 0, 0, 0.1);*/
 }
 
 .spin {
@@ -89,6 +96,11 @@ body .alert {
 .auth-form {
   width: 400px;
   margin: 60px auto;
+}
+
+#categories {
+  text-align:center;
+
 }
 
 #positive-input, #negative-input{
@@ -161,3 +173,61 @@ body .alert {
 .product-tile img{
     max-width: 100%;
 }
+
+#prodCat {
+    text-align: center;
+}
+
+.row {
+    max-width:100%
+}
+
+.lead {
+    font-size: 16px;
+}
+
+#catSearch {
+    margin-bottom:10px;
+
+}
+
+#jumbSearch{
+    padding:8px 15px;
+    background:white;
+    border:0px solid #dbdbdb;
+}
+
+#jumbSearch:focus {
+    width: 100%;
+}
+
+}
+#jumbSearch:hover {
+    background-color:#fafafa;
+    color:#207cca;
+}
+
+.input-group-btn{
+    position:relative;
+}
+
+h4.categories-hyper a{
+    color:#E8495F;
+}
+
+h4.categories-hyper a:active{
+    color:#E8495F;
+}
+
+h4.categories-hyper a:visited{
+    color:#E8495F;
+}
+
+
+
+
+
+
+
+
+
