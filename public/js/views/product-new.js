@@ -1,5 +1,6 @@
 var View = require('./base');
 var template = require('../../templates/product-new.hbs');
+var Category = require('../models/category');
 
 module.exports = View.extend({
 
@@ -11,6 +12,7 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('category-new');
+    this.category = new Category();
     this.searchResults = {};
     this.instaResults = {};
   },
@@ -109,18 +111,31 @@ module.exports = View.extend({
   handleSubmit: function(e) {
     e.preventDefault();
     var self = this;
+    var category;
     var product = this.searchResults[this.$el.find('#name').val()];
     var insta = this.$el.find('#insta').val();
     var thumbnail = this.$el.find("div.thumbnail.selected img.image_picker_image").attr('src');
-    self.collection.create({
-      name: product.name,
-      product_data: product,
-      category: product.category,
-      hashtag: insta,
-      thumbnail: thumbnail
-      },{
-      success: function(model) {
-        window.app.navigate('/products/' + model.get('id'), { trigger: true });
+
+    this.category.save({
+      name: product.category
+    }, {
+      success: function(category) {
+        category = category;
+        self.collection.create({
+          name: product.name,
+          product_data: product,
+          categories_id: category.get('id'),
+          hashtag: insta,
+          thumbnail: thumbnail
+        }, {
+          success: function(model) {
+            model.set('categories', category.toJSON());
+            window.app.navigate('/products/' + model.get('id'), { trigger: true });
+          },
+          error: function(model, xhr) {
+            console.error(xhr);
+          }
+        });
       },
       error: function(model, xhr) {
         console.error(xhr);

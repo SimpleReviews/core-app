@@ -1,17 +1,18 @@
 <div class="wrapper">
   <h1>{{name}}</h1>
-
-    <div class="row product-tile">
-      {{#each products}}
-        <div class="col-xs-6 col-md-3 product-media"> 
-            <a href="/#/products/{{id}}">
-                <img src="{{thumbnail}}">
-                <div class="product-caption">
-                    {{name}}
-                </div>
-            </a>
-        </div>
-      {{/each}}
+  {{#each products}}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h4 class="category-name">
+          <img src="{{thumbnail}}" class="img-rounded" height="30"/>
+          <span class="overflow-wrapper">
+            <a href="/#/products/{{id}}">{{name}}</a>
+          </span>
+        </h4>
+      </div>
+      <div class="panel-footer clearfix">
+        <span class="badge badge-green"># of Reviews</span>
+      </div>
     </div>
-
+  {{/each}}
 </div>

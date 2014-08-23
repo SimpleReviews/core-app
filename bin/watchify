@@ -1,0 +1,2 @@
+#!/bin/sh
+watchify --t hbsfy public/js/main.js -o public/bundle.js

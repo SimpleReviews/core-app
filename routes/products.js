@@ -17,6 +17,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
+  console.log(req.params.id);
   db.get('denorm_products', req.params.id)
     .then(function(results) {
       results.body.id = req.params.id;
@@ -42,16 +43,32 @@ router.put('/:id', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  console.log(req.body)
   db.post('products', req.body)
     .then(function(results) {
       // get the key that orchestrate creates from the header
       req.body.id = results.headers.location.split('/')[3];
-      findOrCreateCategory(req.body.category, req.body.id);
-      // send the product back to the client
+    })
+    .then(function() {
+      return db.newGraphBuilder()
+        .create()
+        .from('products', req.body.id)
+        .related('category')
+        .to('categories', req.body.categories_id);
+    })
+    .then(function() {
+      return db.newGraphBuilder()
+        .create()
+        .from('categories',  req.body.categories_id)
+        .related('products')
+        .to('products', req.body.id);
+    })
+    .then(function() {
+      denorm.run('products', req.body.id);
+      denorm.run('categories', req.body.categories_id);
       res.json(req.body);
     })
     .fail(function(err) {
+      console.log(err);
       res.status(err.statusCode)
         .json({ message: err.body.message });
     });
@@ -69,43 +86,5 @@ router.delete('/:id', function(req, res) {
         .json({ message: err.body.message });
     });
 });
-
-function findOrCreateCategory(name, productId) {
-  console.log(name);
-  var categoryId;
-  db.search('categories', 'value.name:' + '"' + name + '"')
-    .then(function(results) {
-      console.log('1');
-      // if it doesn't exist, create a new category
-      if (!results.body.results.length && name) {
-        return db.post('categories', { name: name });
-      }
-      // if it does, return the existing category's key
-      return results.body.results[0].path.key;
-    })
-    .then(function(results) {
-      if (results.headers) {
-        categoryId = results.headers.location.split('/')[3];
-      } else {
-        categoryId = results;
-      }
-      // create a graph between categories and products
-      return db.newGraphBuilder()
-        .create()
-        .from('categories',  categoryId)
-        .related('products')
-        .to('products', productId)
-    })
-    .then(function() {
-      console.log('3');
-      // denormalize the categories and products collections
-      denorm.run('products', productId);
-      denorm.run('categories', categoryId);
-    })
-    .fail(function(err) {
-      console.log('4');
-      throw err;
-    });
-}
 
 module.exports = router;

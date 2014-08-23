@@ -1,22 +1,35 @@
 <div class="wrapper">
-    <div class="jumbotron text-center">
-        <h1 class="lead">No more boring reviews.</h1>
-        <p class="lead">Read a few bullet points, watch some videos and make a decision.</p>
-            <div class="input-group" id="catSearch">
-                <input type="text" class="form-control" id="jumbSearch" placeholder ="Search...">
-                <span class="input-group-btn">
-                <button class="btn btn-default" type="button" id="jSearchGo">Go!</button>
-                </span>
-            </div>
-    </div> 
+  <div class="text-center">
+    <h1>No more boring reviews.</h1>
+    <p>Read a few bullet points, watch some videos and make a decision.</p>
+  </div>
+  <br>
+  <div class="form-group">
+    <input type="text" class="form-control categories-search" placeholder="Search categories"/>
+  </div>
 
-<div class="row">
-    <h1>Categories</h1>
+  <div class="halves">
     {{#each}}
-        <div class="col-xs-6 col-md-3"> 
-            <a href="/#/categories/{{id}}"><h4 class="categories-hyper">{{name}}</h4></a>
+    <div class="grid-cell">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4 class="category-name">
+            <span class="overflow-wrapper">
+              <a href="/#/categories/{{id}}">{{name}}</a>
+            </span>
+          </h4>
         </div>
+        <div class="panel-footer clearfix">
+          <span class="badge badge-green pull-right">{{products.length}} Products</span>
+          <div class="overflow-wrapper">
+            {{#each products}}
+              <img src="{{thumbnail}}" class="img-rounded" height="20"/>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
     {{/each}}
-</div>
+  </div>
 
 </div>

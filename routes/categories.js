@@ -54,10 +54,10 @@ router.put('/:id', function(req, res) {
 router.post('/', function(req, res) {
   db.post('categories', req.body)
     .then(function(results) {
-      // get the key that orchestrate creates from the header
-      req.body.id = results.headers.location.split('/')[3];
+      return findOrCreateCategory(req.body.name);
     })
-    .then(function(results) {
+    .then(function(categoryId) {
+      req.body.id = categoryId;
       res.json(req.body);
     })
     .fail(function(err) {
@@ -76,5 +76,24 @@ router.delete('/:id', function(req, res) {
         .json({ message: err.body.message });
     });
 });
+
+function findOrCreateCategory(name) {
+  console.log(name);
+  return db.search('categories', 'value.name:' + '"' + name + '"')
+    .then(function(results) {
+      console.log('1');
+      // if it doesn't exist, create a new category
+      if (!results.body.results.length && name) {
+        return db.post('categories', { name: name });
+      }
+      // if it does, return the existing category's key
+      return results.body.results[0].path.key;
+    })
+    .then(function(results) {
+      if (results.headers)
+        return results.headers.location.split('/')[3];
+      return results;
+    });
+}
 
 module.exports = router;
