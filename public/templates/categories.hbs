@@ -23,7 +23,7 @@
           <span class="badge badge-green pull-right">{{products.length}} Products</span>
           <div class="overflow-wrapper">
             {{#each products}}
-              <img src="{{thumbnail}}" class="img-rounded" height="20"/>
+            <a href="#/products/{{id}}"><img src="{{thumbnail}}" class="img-rounded" height="20"/></a>
             {{/each}}
           </div>
         </div>
