@@ -4,9 +4,11 @@
     <p>Read a few bullet points, watch some videos and make a decision.</p>
   </div>
   <br>
-  <div class="form-group">
-    <input type="text" class="form-control categories-search" placeholder="Search categories"/>
-  </div>
+  <form id="product-search-form">
+    <div class="form-group">
+      <input type="text" id="query" class="form-control categories-search" placeholder="Search products"/>
+    </div>
+  </form>
 
   <div class="halves">
     {{#each}}
@@ -23,7 +25,9 @@
           <span class="badge badge-green pull-right">{{products.length}} Products</span>
           <div class="overflow-wrapper">
             {{#each products}}
-            <a href="#/products/{{id}}" data-toggle="tooltip" title="{{name}}" data-placement="bottom"><img src="{{thumbnail}}" class="img-rounded" height="20"/></a>
+              <a href="/#/products/{{id}}" data-toggle="tooltip" title="{{name}}" data-placement="bottom">
+                <img src="{{thumbnail}}" class="img-rounded" height="20"/>
+              </a>
             {{/each}}
           </div>
         </div>

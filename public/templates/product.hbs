@@ -2,7 +2,8 @@
     <br>
     <div class="panel panel-default">
       <div class="panel-body">
-        <h1>{{name}} <small>{{product_data.model}}</small></h1>
+        <h1>{{name}}</h1>
+        <p>{{product_data.model}}</p>
       </div>
       <div class="panel-footer">
         <a href="#/categories/{{categories.id}}"><span class="badge badge-green">{{categories.name}}</span></a>
@@ -30,6 +31,8 @@
                         <span class="badge">{{count}}</span>
                         {{text}}
                     </a>
+                  {{else}}
+                    <div class="well">There are no positive reviews.</div>
                   {{/each}}
                 </div>
             </div>
@@ -41,6 +44,8 @@
                         <span class="badge">{{count}}</span>
                         {{text}}
                     </a>
+                    {{else}}
+                      <div class="well">There are no negative reviews.</div>
                   {{/each}}
                 </div>
             </div>

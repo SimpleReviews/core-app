@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <h1 class="text-center">Search for Products.</h1>
+  <div class="form-group">
+    <input type="text" class="form-control categories-search" placeholder="Search categories" value="{{query}}"/>
+  </div>
+  <h4>Product results for <b><em>{{query}}</em></b></h4>
+
+  {{#each searchResults}}
+    {{name}}
+  {{/each}}
+</div>

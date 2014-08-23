@@ -107,6 +107,7 @@ var Auth = {
   },
 
   onChange: function(user) {
+    this.currentUser = user;
     this.trigger('authenticated', user);
   }
 };
