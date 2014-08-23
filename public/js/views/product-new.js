@@ -11,8 +11,8 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('category-new');
-    this.searchResults = [];
-    this.instaResults = [];
+    this.searchResults = {};
+    this.instaResults = {};
   },
 
   afterRender: function() {
@@ -65,7 +65,7 @@ module.exports = View.extend({
                     html += '<option data-img-src="' + images[image].images.thumbnail.url + '" value="' + image + '">' + image + '</option>';
                 }
                 html += '</select>';
-                return html; 
+                return html;
             });
             $("select").imagepicker();
           }
@@ -74,7 +74,7 @@ module.exports = View.extend({
     });
 
     $('#name').selectize({
-      valueField: 'ean',
+      valueField: 'sem3_id',
       labelField: 'name',
       searchField: 'name',
       options: [],
@@ -96,10 +96,10 @@ module.exports = View.extend({
           },
           success: function(res) {
             console.log(res);
-            callback(res);
             res.forEach(function(item) {
-              self.searchResults[item.ean] = item;
+              self.searchResults[item.sem3_id] = item;
             });
+            callback(res);
           }
         });
       }
@@ -111,12 +111,13 @@ module.exports = View.extend({
     var self = this;
     var product = this.searchResults[this.$el.find('#name').val()];
     var insta = this.$el.find('#insta').val();
+    var thumbnail = this.$el.find("div.thumbnail.selected img.image_picker_image").attr('src');
     self.collection.create({
       name: product.name,
       product_data: product,
       category: product.category,
       hashtag: insta,
-      thumbnail: $("div.thumbnail.selected img.image_picker_image").attr('src'),
+      thumbnail: thumbnail
       },{
       success: function(model) {
         window.app.navigate('/products/' + model.get('id'), { trigger: true });
