@@ -12,8 +12,14 @@
     <div class="navbar-collapse collapse" style="height: 1px;">
       <ul class="nav navbar-nav pull-right">
         {{#if currentUser}}
-          <li><a href="#">{{currentUser.username}}</a></li>
-          <li><a id="signout" href="#">Sign out</a></li>
+          <li>
+            <a href="#">
+              <img src="http://avatars.io/email/{{currentUser.email}}" class="img-rounded" height="22"/>
+              {{currentUser.username}}
+            </a>
+          </li>
+          <li><a href="/#/products/new"><i class="fa fa-plus"></i></a></li>
+          <li><a id="signout" href="#"><i class="fa fa-sign-out"></i></a></li>
         {{else}}
           <li><a href="/#/signup">Sign up</a></li>
           <li><a href="/#/signin">Sign in</a></li>
