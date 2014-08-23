@@ -5,6 +5,17 @@ var normalize = require('../lib/normalize');
 var denorm = require('../lib/denorm')();
 var kew = require('kew');
 
+router.get('/search', function(req, res) {
+  db.search('denorm_products', 'value.name:' + '"' + req.query.q + '"')
+    .then(function(results) {
+      res.json(normalize(results.body.results));
+    })
+    .fail(function(err) {
+      res.status(err.statusCode)
+        .json({ message: err.body.message });
+    });
+});
+
 router.get('/', function(req, res) {
   db.list('denorm_products')
     .then(function(results) {

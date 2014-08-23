@@ -1,11 +1,25 @@
 <div class="wrapper">
   <h1 class="text-center">Search for Products.</h1>
-  <div class="form-group">
-    <input type="text" class="form-control categories-search" placeholder="Search categories" value="{{query}}"/>
-  </div>
+  <form id="product-search-form">
+    <div class="form-group">
+      <input type="text" id="query" class="form-control categories-search" placeholder="Search products" value="{{query}}"/>
+    </div>
+  </form>
   <h4>Product results for <b><em>{{query}}</em></b></h4>
 
   {{#each searchResults}}
-    {{name}}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h4 class="category-name">
+          <img src="{{thumbnail}}" class="img-rounded" height="30"/>
+          <span class="overflow-wrapper">
+            <a href="/#/products/{{id}}">{{name}}</a>
+          </span>
+        </h4>
+      </div>
+      <div class="panel-footer clearfix">
+        <span class="badge badge-green"># of Reviews</span>
+      </div>
+    </div>
   {{/each}}
 </div>

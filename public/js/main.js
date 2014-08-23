@@ -17,6 +17,7 @@ var SigninView = require('./views/signin');
 var SignupView = require('./views/signup');
 var User = require('./models/user');
 var ProductSearchView = require('./views/product-search');
+var SearchCollection = require('./collections/search');
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -34,6 +35,7 @@ var Router = Backbone.Router.extend({
     this.appView = new AppView({ el: 'body' });
     this.categories = new CategoryCollection();
     this.products = new ProductCollection();
+    this.search = new SearchCollection();
   },
   categories: function() {
     var self = this;
@@ -65,8 +67,8 @@ var Router = Backbone.Router.extend({
   productSearch: function(query) {
     var self = this;
     this.appView.showSpinner();
-    this.products.fetch({ q: query }).then(function() {
-      self.renderDetail(new ProductSearchView({ query: query, collection: self.products }));
+    this.search.fetch({ data: { q: query } }).then(function() {
+      self.renderDetail(new ProductSearchView({ query: query, collection: self.search }));
     });
   },
   signin: function() {

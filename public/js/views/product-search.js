@@ -2,6 +2,11 @@ var View = require('./base');
 var template = require('../../templates/product-search.hbs');
 
 module.exports = View.extend({
+
+  events: {
+    'submit #product-search-form': 'handleSubmit'
+  },
+
   template: template,
 
   initialize: function(options) {
@@ -14,5 +19,12 @@ module.exports = View.extend({
       query: this.query,
       searchResults: this.collection.toJSON()
     }
+  },
+
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var query = this.$('#query').val();
+    window.app.navigate('#/products/search/'+ encodeURI(query), { trigger: true });
   }
+
 });
