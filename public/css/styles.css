@@ -1,3 +1,20 @@
+@media screen and (max-width:850px){
+  .nav navbar-nav{
+    position:absolute;
+    right:0;
+  }
+  .navbar {
+    position:absolute;
+    left:0;
+    margin-left:15px;
+  }
+  .wrapper {
+    max-width:100%;
+    margin-right:15px;
+    padding:0;
+  }
+}
+
 body {
   padding-top: 50px;
   font: 14px Helvetica, Arial, sans-serif;
