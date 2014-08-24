@@ -40,6 +40,9 @@ body h1 {
 body .alert {
   margin-top: 20px;
 }
+div .text-center {
+    max-width:100%;
+}
 
 .navbar {
     margin:0px;
