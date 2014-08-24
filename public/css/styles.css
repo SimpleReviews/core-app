@@ -3,7 +3,7 @@
     position:absolute;
     right:0;
   }
-  .navbar {
+  .navbar-brand {
     position:absolute;
     left:0;
     margin-left:15px;
@@ -12,6 +12,15 @@
     max-width:100%;
     margin-right:15px;
     padding:0;
+  }
+}
+@media screen and (max-width:350px){
+  .navbar-brand {
+    max-width:100%;
+    left:0;
+    margin-left:5px;
+    margin-bottom:15px;
+    padding-left:0;
   }
 }
 
