@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = $;
+var querystring = require('querystring');
 
 var AppView = require('./views/app');
 
@@ -24,9 +25,9 @@ var Router = Backbone.Router.extend({
     '': 'categories',
     'categories/new': 'categoryNew',
     'categories/:id': 'category',
+    'products/search(?*queryString)': 'productSearch',
     'products/new': 'productNew',
     'products/:id': 'product',
-    'products/search/:query': 'productSearch',
     'signin': 'signin',
     'signup': 'signup',
     '*notFound': 'notFound'
@@ -64,11 +65,12 @@ var Router = Backbone.Router.extend({
   productNew: function() {
     this.renderDetail(new ProductNewView({ collection: this.products }));
   },
-  productSearch: function(query) {
+  productSearch: function(queryString) {
     var self = this;
+    var params = querystring.parse(queryString);
     this.appView.showSpinner();
-    this.search.fetch({ data: { q: query } }).then(function() {
-      self.renderDetail(new ProductSearchView({ query: query, collection: self.search }));
+    this.search.fetch({ data: { q: params.q } }).then(function() {
+      self.renderDetail(new ProductSearchView({ query: params.q, collection: self.search }));
     });
   },
   signin: function() {

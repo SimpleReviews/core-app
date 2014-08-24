@@ -19,6 +19,6 @@ module.exports = View.extend({
     console.log('search');
     var query = this.$('#query').val();
     console.log(query);
-    window.app.navigate('#/products/search/'+ encodeURI(query), { trigger: true });
+    window.app.navigate('#/products/search?q='+ encodeURI(query), { trigger: true });
   }
 });
