@@ -15,6 +15,7 @@ module.exports = View.extend({
   },
 
   afterRender: function() {
+    $("videos").css('visibility','hidden');
     $.ajax({
       url: '/youtube/search?q='+this.model.get('name').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," "),
       type: 'GET',
@@ -25,13 +26,27 @@ module.exports = View.extend({
         for (var i in res){
             var url = res[i].url;
             var thumbnail = res[i].thumbnails[0].url;
-            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" height="150" class="cloud9-item"></a>');
+            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" height="150" class="cloud9-item" alt=' + i + '></a>');
         }
         $("#videos").Cloud9Carousel( {
           buttonLeft: $("#video-buttons > .left"),
           buttonRight: $("#video-buttons > .right"),
           speed: 10,
-          bringToFront: true
+          bringToFront: true,
+          onLoaded: function() {
+            showcase.css( 'visibility', 'visible' );
+            showcase.css( 'display', 'none' );
+            showcase.fadeIn( 1500 );
+          },
+          onRendered: function(carousel) {
+            $('#youtube-title').text(res[carousel.nearestItem().element.alt].title);
+            $('#youtube-body').html(function(){return '';});
+            $('#youtube-body').append("Author: " + res[carousel.nearestItem().element.alt].author+ "<br />");
+            $('#youtube-body').append("Published:" + res[carousel.nearestItem().element.alt].title + "<br />");
+            $('#youtube-body').append("Category: " + res[carousel.nearestItem().element.alt].category + "<br />");
+            $('#youtube-body').append("Description: " + res[carousel.nearestItem().element.alt].description+ "<br />");
+            $('#youtube-body').append("View Count: " + res[carousel.nearestItem().element.alt].viewCount);
+          }
         });
       }
     });
