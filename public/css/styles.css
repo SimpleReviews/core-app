@@ -181,6 +181,15 @@ div .text-center {
     cursor: text;
 }
 
+ul.thumbnails.image_picker_selector li .thumbnail.selected {
+  background: rgba(42, 54, 59, 3);
+}
+#image_picker_image{
+    border-color: rgba(42, 54, 59, 3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(42, 54, 59, 3);
+    outline: 0 none;
+}
+
 .media-wrapper {
     margin: auto;
     text-align: center;
@@ -303,6 +312,13 @@ h4 {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(42, 54, 59, .5);
     outline: 0 none;
 }
+
+.selectize-input.focus {
+    border-color: #2A363B;
+    outline: 0px none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(42, 54, 59, 0.6);
+}
+
 .selectize-dropdown, .selectize-input, .selectize-input input{
     font-family: 'Roboto Condensed', sans-serif;
 }
