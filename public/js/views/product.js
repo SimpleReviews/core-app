@@ -21,29 +21,40 @@ module.exports = View.extend({
       error: function() {
       },
       success: function(res) {
-        console.log(res);
-        console.log(res[0].url);
+        $('#videos').html(function(){return '';});
         for (var i in res){
             var url = res[i].url;
             var thumbnail = res[i].thumbnails[0].url;
-            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" height="150"></a>');
+            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" height="150" class="cloud9-item"></a>');
         }
+        $("#videos").Cloud9Carousel( {
+          buttonLeft: $("#video-buttons > .left"),
+          buttonRight: $("#video-buttons > .right"),
+          speed: 10,
+          bringToFront: true
+        });
       }
     });
     $.ajax({
-      url: '/instagram/recent?q='+this.model.get('hashtag'),
+      url: '/instagram/recent?q='+this.model.get('hashtag')+'&count=14',
       type: 'GET',
       error: function() {
+          console.log('unable to get instagram photos');
       },
       success: function(res) {
-        console.log(res);
-        console.log(res[0].url);
+        $('#instagram').html(function(){return '';});
         for (var i in res){
             var url = res[i].link;
             var thumbnail = res[i].images.thumbnail.url;
             var alt = res[i].caption.text;
-            $('#instagram').prepend('<a href="' + url + '"><img src="' + thumbnail + '" alt="' + alt + '" width="150" height="150"></a>');
+            $('#instagram').append('<a href="' + url + '"><img src="' + thumbnail + '" alt="' + alt + '" width="150" height="150" class="cloud9-item"></a>');
         }
+        $("#instagram").Cloud9Carousel( {
+          buttonLeft: $("#instagram-buttons > .left"),
+          buttonRight: $("#instagram-buttons > .right"),
+          speed: 10,
+          bringToFront: true
+        });
       }
     });
   },

@@ -187,7 +187,7 @@ div .text-center {
 .scrolls {
     overflow-x: scroll;
     overflow-y: hidden;
-    height: 150px;
+    height: 255px;
     white-space:nowrap
 }
 
