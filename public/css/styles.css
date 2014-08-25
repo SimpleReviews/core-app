@@ -50,6 +50,13 @@ div .text-center {
     box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
+.panel-default > .panel-heading{
+    font-family: 'Montserrat';
+    font-weight: 400;
+    background-color:transparent;
+    border:0;
+}
+
 .wrapper {
   width: 860px;
   margin: 0 auto;
@@ -279,4 +286,13 @@ div.col-xs-6 col-md-3 a{
 
 h4 {
     margin:10px;
+}
+
+#youtube-info {
+    width:100%;
+}
+
+#youtube-title, #youtube-body{
+    white-space: nowrap;
+    overflow: hidden;
 }

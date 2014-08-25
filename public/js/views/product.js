@@ -26,7 +26,7 @@ module.exports = View.extend({
         for (var i in res){
             var url = res[i].url;
             var thumbnail = res[i].thumbnails[0].url;
-            $('#videos').prepend('<a href="' + url + '"><img src="' + thumbnail + '" height="150" class="cloud9-item" alt=' + i + '></a>');
+            $('#videos').prepend('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" height="150" class="cloud9-item" alt=' + i + ' targer="_blank"></a>');
         }
         $("#videos").Cloud9Carousel( {
           buttonLeft: $("#video-buttons > .left"),
@@ -42,10 +42,9 @@ module.exports = View.extend({
             $('#youtube-title').text(res[carousel.nearestItem().element.alt].title);
             $('#youtube-body').html(function(){return '';});
             $('#youtube-body').append("Author: " + res[carousel.nearestItem().element.alt].author+ "<br />");
-            $('#youtube-body').append("Published:" + res[carousel.nearestItem().element.alt].title + "<br />");
-            $('#youtube-body').append("Category: " + res[carousel.nearestItem().element.alt].category + "<br />");
-            $('#youtube-body').append("Description: " + res[carousel.nearestItem().element.alt].description+ "<br />");
-            $('#youtube-body').append("View Count: " + res[carousel.nearestItem().element.alt].viewCount);
+            $('#youtube-body').append("Published:" + res[carousel.nearestItem().element.alt].published + "<br />");
+            $('#youtube-body').append("View Count: " + res[carousel.nearestItem().element.alt].statistics.viewCount + "<br />");
+            $('#youtube-body').append("View Count: " + res[carousel.nearestItem().element.alt].statistics.favoriteCount);
           }
         });
       }
@@ -62,7 +61,7 @@ module.exports = View.extend({
             var url = res[i].link;
             var thumbnail = res[i].images.thumbnail.url;
             var alt = res[i].caption.text;
-            $('#instagram').append('<a href="' + url + '"><img src="' + thumbnail + '" alt="' + alt + '" width="150" height="150" class="cloud9-item"></a>');
+            $('#instagram').append('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" alt="' + alt + '" width="150" height="150" class="cloud9-item"></a>');
         }
         $("#instagram").Cloud9Carousel( {
           buttonLeft: $("#instagram-buttons > .left"),
