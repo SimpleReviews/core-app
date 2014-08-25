@@ -24,12 +24,12 @@
     "orchestrate": "~0.3.1",
     "semantics3-node": "0.0.1",
     "spin.js": "~2.0.1",
-    "browserify": "~5.9.1",
     "bcrypt": "~0.8.0",
     "moment": "~2.8.1",
     "jwt-simple": "~0.2.0",
     "static-favicon": "~1.0.0",
     "underscore": "~1.6.0",
-    "youtube-search": "^0.1.4"
+    "youtube-search": "^0.1.4",
+    "twit": "~1.1.18"
   }
 }

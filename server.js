@@ -13,6 +13,7 @@ var youtube = require('./routes/youtube');
 var instagram = require('./routes/instagram');
 var users = require('./routes/users');
 var session = require('./routes/session');
+var twitter = require('./routes/twitter');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/reviews/', reviews);
 app.use('/semantics3/', semantics3);
 app.use('/youtube/', youtube);
 app.use('/instagram/', instagram);
+app.use('/twitter/', twitter);
 app.use('/users', users);
 app.use('/', session);
 
