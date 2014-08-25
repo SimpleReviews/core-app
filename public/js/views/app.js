@@ -1,6 +1,7 @@
 var View = require('./base');
 var SpinView = require('./spin');
 var NavView = require('./nav');
+var FooterView = require('./footer');
 var template = require('../../templates/app.hbs');
 var Auth = require('../models/auth');
 var _ = require('underscore');
@@ -20,6 +21,7 @@ module.exports = View.extend({
     this.spinner = new SpinView({ size: 'large' });
     this.render();
     this.renderNavView();
+    this.renderFooterView();
   },
 
   showSpinner: function() {
@@ -31,6 +33,12 @@ module.exports = View.extend({
     this.navView = new NavView();
     this.navView.setElement(this.$('#nav'));
     this.navView.render();
+  },
+
+  renderFooterView: function() {
+    this.footerView = new FooterView();
+    this.footerView.setElement(this.$('#footer'));
+    this.footerView.render();
   },
 
   renderChildView: function(view) {
