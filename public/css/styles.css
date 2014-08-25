@@ -172,12 +172,13 @@ div .text-center {
 }
 
 #positive-input:focus, #negative-input:focus{
+    border-color: rgba(255, 255, 255, 3);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(42, 54, 59, 3);
+    outline: 0 none;
     background-color:#fff;
     color:#2A363B;
-    border-color: #66AFE9;
     font-weight:100;
     cursor: text;
-    outline: 0px none;
 }
 
 .media-wrapper {
