@@ -349,13 +349,6 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 }
 
 .panel-simple{
-    border:15px solid #1c2427;
-    border-color: #8EA58C;
-    border-radius:0;
-}
-
-.panel-footer{
-    background-color: #99B898;
     border-top:15px solid #8EA58C;
     border-right:15px solid #8EA58C;
     border-left: 15px solid #99B898;
@@ -363,10 +356,21 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     border-radius:0;
 }
 
+.panel-footer{
+   background-color: #99B898;
+   padding:0;
+   border:0;
+   border-radius:0;
+}
+
 .panel-footer-count{
+    padding:1.5ex;
     color:#fff;
 }
 
 .panel-img{
-   border-radius:0; 
+    height:40px;
+    width:40px;
+    overflow:hidden;
+    border-radius:0; 
 }
