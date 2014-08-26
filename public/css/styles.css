@@ -117,12 +117,6 @@ div .text-center {
   display: block;
 }
 
-.category-name {
-  font-size: 24px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
 .halves {
   margin-right: -20px;
 }
@@ -133,9 +127,7 @@ div .text-center {
   padding-right: 20px;
 }
 
-.panel-body {
-  overflow: hidden;
-}
+
 
 .overflow-wrapper {
   max-width: 100%;
@@ -345,12 +337,26 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     box-shadow: none;
 }
 
+.panel-body {
+  padding-left:5px;
+  overflow: hidden;
+}
+
 .panel-simple{
     border-top:15px solid #8EA58C;
     border-right:15px solid #8EA58C;
     border-left: 15px solid #99B898;
     border-bottom: 15px solid #99B898;
     border-radius:0;
+    -webkit-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+    -moz-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+    box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+}
+
+.category-name {
+  font-size: 2em;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .panel-footer{
