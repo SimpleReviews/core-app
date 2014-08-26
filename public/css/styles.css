@@ -153,7 +153,6 @@ div .text-center {
 
 #categories {
   text-align:center;
-
 }
 
 #positive-input, #negative-input{
@@ -251,7 +250,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 
 #catSearch {
     margin-bottom:10px;
-
 }
 
 #jumbSearch{
@@ -264,7 +262,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
     width: 100%;
 }
 
-}
 #jumbSearch:hover {
     background-color:#fafafa;
     color:#207cca;
