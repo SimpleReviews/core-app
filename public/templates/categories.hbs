@@ -17,7 +17,7 @@
   <div class="halves">
     {{#each}}
     <div class="grid-cell">
-      <div class="panel panel-default">
+      <div class="panel panel-simple">
         <div class="panel-body">
           <h4 class="category-name">
             <span class="overflow-wrapper">
@@ -30,7 +30,7 @@
           <div class="overflow-wrapper">
             {{#each products}}
               <a href="/#/products/{{id}}" data-toggle="tooltip" title="{{name}}" data-placement="bottom">
-                <img src="{{thumbnail}}" class="img-rounded" height="20"/>
+                <img src="{{thumbnail}}" class="panel-img" height="20"/>
               </a>
             {{/each}}
           </div>

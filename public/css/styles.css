@@ -278,6 +278,9 @@ a {
     color:#E28FA3;
 }
 
+a:hover {
+    color:#2A363B;
+}
 div.col-xs-6 col-md-3 a{
     margin:10px;
 }
@@ -345,12 +348,25 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     box-shadow: none;
 }
 
+.panel-simple{
+    border:15px solid #1c2427;
+    border-color: #8EA58C;
+    border-radius:0;
+}
+
 .panel-footer{
-    background-color:#2a363b;
-    border-top:3px solid #1c2427;
+    background-color: #99B898;
+    border-top:15px solid #8EA58C;
+    border-right:15px solid #8EA58C;
+    border-left: 15px solid #99B898;
+    border-bottom: 15px solid #99B898;
     border-radius:0;
 }
 
 .panel-footer-count{
     color:#fff;
+}
+
+.panel-img{
+   border-radius:0; 
 }
