@@ -90,13 +90,9 @@ div .text-center {
 .jumbotron {
     padding-top: 10px;
     padding-bottom: 10px;
-}
-
-.jumbotron {
     margin-bottom: 40px;
     color: #2A363B;
-    background-color: #2A363B;
-    color:#E9E9E9;
+    background: transparent;
     border-radius: 7px;
     margin: 40px;
     /*box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(0, 0, 0, 0.1);*/
@@ -290,10 +286,6 @@ div.col-xs-6 col-md-3 a{
     margin:10px;
 }
 
-.row {
-    margin:5%;
-}
-
 h4 {
     margin:10px;
 }
@@ -351,4 +343,14 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 .navbar {
     margin: 0px;
     box-shadow: none;
+}
+
+.panel-footer{
+    background-color:#2a363b;
+    border-top:3px solid #1c2427;
+    border-radius:0;
+}
+
+.panel-footer-count{
+    color:#fff;
 }

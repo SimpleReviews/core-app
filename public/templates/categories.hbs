@@ -1,12 +1,16 @@
 <div class="wrapper">
-  <div class="text-center">
-    <h1>No more boring reviews.</h1>
-    <p>Read a few bullet points, watch some videos and make a decision.</p>
-  </div>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="text-center">
+                <h1>No more boring reviews.</h1>
+                <p>Read a few bullet points, watch some videos and make a decision.</p>
+            </div>
+        </div>
+    </div>
   <br>
   <form id="product-search-form">
-    <div class="form-group">
-      <input type="text" id="query" class="form-control categories-search" placeholder="Search products"/>
+    <div class="form-group form-group-lg">
+      <input type="text" id="query" class="form-control categories-search input-lg" placeholder="Search products"/>
     </div>
   </form>
 
@@ -22,7 +26,7 @@
           </h4>
         </div>
         <div class="panel-footer clearfix">
-          <span class="badge badge-green pull-right">{{products.length}} Products</span>
+          <span class="panel-footer-count pull-right">{{products.length}} Products</span>
           <div class="overflow-wrapper">
             {{#each products}}
               <a href="/#/products/{{id}}" data-toggle="tooltip" title="{{name}}" data-placement="bottom">
