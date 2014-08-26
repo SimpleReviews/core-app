@@ -328,3 +328,27 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(42, 54, 59, 3);
     outline: 0 none;
 }
+
+.breadcrumb{
+    background-color:#2A363B;
+    border-radius:0;
+}
+
+.breadcrumb > li + li:before {
+    padding: 0px 5px;
+    content: "›";
+    color: #FFF;
+}
+
+.breadcrumb > .active {
+    color: #FFF;
+}
+
+.breadcrumb a:hover{
+    color: #FFF;
+}
+
+.navbar {
+    margin: 0px;
+    box-shadow: 0;
+}
