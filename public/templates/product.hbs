@@ -4,12 +4,8 @@
       <li><a href="#/categories/{{categories.id}}">{{categories.name}}</a></li>
       <li class="active">{{name}}</li>
     </ol>
-        <h1>{{name}}</h1>
-        <a href="#/categories/{{categories.id}}"><span class="badge badge-green">{{categories.name}}</span></a>
-        <span class="badge badge-green">{{product_data.brand}}</span>
-        <span class="badge badge-green">#{{hashtag}}</span>
 
-        <hr />
+    <h1>{{name}}<span class="hashtag">#{{hashtag}}</span></h1>
 
         <div class="row">
             <div class="col-xs-6 text-center">
@@ -24,9 +20,12 @@
                 <div id="positive" class="list-group">
                   <h3>Positive Reviews</h3>
                   {{#each positiveReviews}}
-                    <a href="" class="list-group-item list-group-item-success">
+                    <a href="" class="list-group-item list-group-item-success review-item">
                         <span class="badge">{{count}}</span>
                         {{text}}
+                        <div class="overlay">
+                            <span class="agree">FACT!</span>
+                        </div>
                     </a>
                   {{else}}
                     <div class="well">There are no positive reviews.</div>
@@ -37,9 +36,12 @@
                 <h3>Negative Reviews</h3>
                 <div id="negative" class="list-group">
                   {{#each negativeReviews}}
-                    <a href="" class="list-group-item list-group-item-danger">
+                    <a href="" class="list-group-item list-group-item-danger review-item">
                         <span class="badge">{{count}}</span>
                         {{text}}
+                        <div class="overlay">
+                            <span class="agree">FACT!</span>
+                        </div>
                     </a>
                     {{else}}
                       <div class="well">There are no negative reviews.</div>
@@ -111,5 +113,4 @@
 
         </div>
 
-    </div>
 </div>
