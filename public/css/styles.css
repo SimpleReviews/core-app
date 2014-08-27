@@ -510,3 +510,27 @@ a.list-group-item-negative:hover{
     -moz-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.4);
     box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.4);
 }
+
+.btn-simple{
+    background-color:#2A363B;
+    padding: 0 12px 6px 12px;
+    margin: 2px 5px 2px 0;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight:100;
+    font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+    color:#fff;
+    text-shadow: 1px 1px 1px rgba(255,255,255,.5);
+    background-clip: padding-box;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    box-shadow: inset 0 -4px 0 rgba(255,255,255,0.2);
+    -webkit-box-shadow: inset 0 -4px 0 rgba(255,255,255,0.2);
+}
+
+.btn-simple:hover, .btn-simple:active{
+    color:rgba(255,255,255,0.5);
+    box-shadow: inset 0 -5px 0 rgba(255,255,255,0.4);
+    -webkit-transition: opacity .25s ease;
+    -moz-transition: opacity .25s ease;
+}
