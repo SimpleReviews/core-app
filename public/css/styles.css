@@ -15,9 +15,8 @@
     }
     body .grid-cell{
         width: 100%;
-        margin:0;
-        position: absolute;
-
+        margin-right:auto;
+        margin-left:auto;
     }
 
 }
@@ -41,6 +40,13 @@
         width: 100%;
         margin-right:auto;
         margin-left:auto;
+    }
+    body .halves {
+        margin:0;
+    }
+
+    #main {
+        font-size:24;
     }
 
 }
