@@ -24,10 +24,11 @@ module.exports = View.extend({
     return {
       isAuthenticated: Auth.loggedIn,
       currentUser: this.currentUser
-    }
+    };
   },
 
-  signout: function() {
+  signout: function(e) {
+    e.preventDefault();
     Auth.close();
   }
 
