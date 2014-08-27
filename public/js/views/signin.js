@@ -13,6 +13,7 @@ module.exports = View.extend({
   initialize: function(options) {
     console.log('signin');
     this.error = null;
+    this.transitionTo = null;
   },
 
   afterRender: function() {
@@ -36,7 +37,11 @@ module.exports = View.extend({
 
     Auth.open(email, password)
       .then(function() {
-        window.app.navigate('/#/', { trigger: true });
+        if (self.transitionTo) {
+          window.app.navigate(self.transitionTo, { trigger: true });
+        } else {
+          window.app.navigate('/#/', { trigger: true });
+        }
       })
       .fail(function(err) {
         console.log(err)
