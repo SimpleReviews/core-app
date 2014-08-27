@@ -244,7 +244,12 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 
 .row {
-    max-width:100%
+    max-width:100%;
+    margin:0;
+}
+
+.section{
+    padding-bottom:5em;
 }
 
 .lead {
@@ -350,12 +355,26 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     box-shadow: none;
 }
 
+.panel-body {
+    padding-left:5px;
+    overflow: hidden;
+}
+
 .panel-simple{
     border-top:15px solid #8EA58C;
     border-right:15px solid #8EA58C;
     border-left: 15px solid #99B898;
     border-bottom: 15px solid #99B898;
     border-radius:0;
+    -webkit-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+    -moz-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+    box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+}
+
+.category-name {
+    font-size: 2em;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .panel-footer{
@@ -383,4 +402,98 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     width:40px;
     margin-right:-4px;
     border-radius:0;
+}
+
+.hashtag{
+    font-size: 1.4ex;
+    font-weight: 100;
+    font-family: 'Roboto Condensed';
+    padding: 1ex;
+    color: #99B898;
+}
+
+.overlay{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.1);
+    text-align:center;
+    opacity:0;
+    -webkit-transition: opacity .25s ease;
+    -moz-transition: opacity .25s ease;
+}
+
+.review-item {
+    overflow:hidden;
+}
+
+.agree{
+    font-size: 2em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+a.list-group-item-positive:hover .agree{
+    color:rgba(255,255,255,.9)
+}
+
+a.list-group-item-negative:hover .agree{
+    color:rgba(0,0,0,.9)
+}
+
+.review-item:hover .overlay{
+    opacity:1;
+}
+
+.list-group-item{
+    margin-bottom:2px;
+}
+
+a.list-group-item-positive{
+    color: #000;
+    background-color: #99B898;
+}
+
+a.list-group-item-positive:hover{
+    color: transparent;
+    background-color: #99B898;
+}
+
+a.list-group-item-negative{
+    color: #fff;
+    background-color: #E8495F;
+}
+
+a.list-group-item-negative:hover{
+    color: transparent;
+    background-color: #C64259;
+}
+
+.well-simple {
+    padding: 4px;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+.well-simple-info {
+    width:100%;
+}
+
+.well-simple-title, .well-simple-body{
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.well-simple-body{
+    font-family: 'Montserrat', sans-serif;
+    font-size:3em
+}
+
+.cloud9-item{
+    -webkit-transition: opacity .25s ease;
+    -moz-transition: opacity .25s ease;
+    -webkit-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.4);
+    -moz-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.4);
+    box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.4);
 }
