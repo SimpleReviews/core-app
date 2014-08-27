@@ -45,9 +45,33 @@
         margin:0;
     }
 
-    #main {
-        font-size:24;
+
+    h1, .h1  {
+        font-size:24px;
     }
+
+    body .row section {
+        margin-left:8px;
+    }
+
+    h1 .product {
+        font-size:22px;
+        margin-left:5px;
+    }
+    span .hashtag {
+        font-size:18px;
+    }
+
+    .jumbotron p {
+        font-size:15px;
+    }
+
+    body .col-xs-6 {
+        width: 100%;
+        margin-right:auto;
+        margin-left:auto;
+    }
+
 
 }
 
