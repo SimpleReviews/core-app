@@ -86,7 +86,13 @@ module.exports = View.extend({
         for (var i in res){
             var url = res[i].link;
             var thumbnail = res[i].images.thumbnail.url;
-            var alt = res[i].caption.text;
+            var alt;
+            if (res[i].caption){
+                alt = res[i].caption.text;
+            }
+            else{
+                alt = "No Description";
+            }
             $('#instagram').append('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" alt="' + alt + '" width="150" height="150" class="cloud9-item"></a>');
         }
         $("#instagram").Cloud9Carousel( {
