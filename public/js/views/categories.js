@@ -14,6 +14,12 @@ module.exports = View.extend({
     //this.render();
   },
 
+  templateData: function() {
+    return {
+      categories: this.collection.toJSON()
+    }
+  },
+
   handleSubmit: function(e) {
     e.preventDefault();
     console.log('search');
