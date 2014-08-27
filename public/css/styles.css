@@ -288,15 +288,6 @@ h4 {
     margin:10px;
 }
 
-#youtube-info {
-    width:100%;
-}
-
-#youtube-title, #youtube-body{
-    white-space: nowrap;
-    overflow: hidden;
-}
-
 .selectize-control.single .selectize-input.input-active, .selectize-control.single .selectize-input.input-active input {
     border-color: rgba(255, 255, 255, 3);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(42, 54, 59, .5);
@@ -457,4 +448,24 @@ a.list-group-item-negative{
 a.list-group-item-negative:hover{
     color: transparent;
     background-color: #C64259;
+}
+
+.well-simple {
+    padding: 4px;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+.well-simple-info {
+    width:100%;
+}
+
+.well-simple-title, .well-simple-body{
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.well-simple-body{
+    font-family: 'Montserrat', sans-serif;
+    font-size:3em
 }

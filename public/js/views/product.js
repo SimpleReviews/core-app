@@ -63,11 +63,8 @@ module.exports = View.extend({
           bringToFront: true,
           onRendered: function(carousel) {
             $('#youtube-title').text(res[carousel.nearestItem().element.alt].title);
-            $('#youtube-body').html(function(){return '';});
-            $('#youtube-body').append("Author: " + res[carousel.nearestItem().element.alt].author+ "<br />");
-            $('#youtube-body').append("Published:" + res[carousel.nearestItem().element.alt].published + "<br />");
-            $('#youtube-body').append("View Count: " + res[carousel.nearestItem().element.alt].statistics.viewCount + "<br />");
-            $('#youtube-body').append("View Count: " + res[carousel.nearestItem().element.alt].statistics.favoriteCount);
+            $('#youtube-youtuber').html(function(){return res[carousel.nearestItem().element.alt].author;});
+            $('#youtube-views').html(function(){return res[carousel.nearestItem().element.alt].statistics.viewCount;});
           }
         });
       }
