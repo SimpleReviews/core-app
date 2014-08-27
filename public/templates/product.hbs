@@ -4,28 +4,17 @@
       <li><a href="#/categories/{{categories.id}}">{{categories.name}}</a></li>
       <li class="active">{{name}}</li>
     </ol>
-    <br>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h1>{{name}}</h1>
-        <p>{{product_data.model}}</p>
-      </div>
-      <div class="panel-footer">
-        <a href="#/categories/{{categories.id}}"><span class="badge badge-green">{{categories.name}}</span></a>
-        <span class="badge badge-green">{{product_data.brand}}</span>
-        <span class="badge badge-green">#{{hashtag}}</span>
-      </div>
+    <div class="row section">
+        <h1>{{name}}<span class="hashtag">#{{hashtag}}</span></h1>
     </div>
 
-    <div class="container-fluid">
+    <div class="section">
         <div class="row">
             <div class="col-xs-6 text-center">
                 <img src="/img/positive.png" src="Positive">
-                <hr>
             </div>
             <div class="col-xs-6 text-center">
                 <img src="/img/negative.png" src="Negative">
-                <hr>
             </div>
         </div>
         <div class="row">
@@ -53,15 +42,17 @@
                 </form>
             </div>
         </div>
-        <div class="row">
+    </div>
+    <div class="row section">
+        <div class="col-xs-12">
             <h3>Youtube</h3>
                 <div id="videos" class="scrolls">
                 </div>
                 <div class="text-center">
                     <div class="panel panel-default" id="youtube-info">
-                        <div class="panel-heading"> 
-                            <h3 class="panel-title" id="youtube-title"></h3> 
-                        </div> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title" id="youtube-title"></h3>
+                        </div>
                         <div class="panel-body" id="youtube-body">
                         </div>
                     </div>
@@ -73,15 +64,16 @@
                         ‹
                       </button>
                       <button class="right btn btn-default">
-                        › 
+                        ›
                       </button>
                     </div>
                 </div>
         </div>
+    </div>
 
-        <div class="row">
+    <div class="row section">
+        <div class="col-xs-12">
             <h3>Instagram</h3>
-            <div>
               <div id="instagram" class="scrolls">
               </div>
             <div class="text-center">
@@ -90,17 +82,10 @@
                     ‹
                   </button>
                   <button class="right btn btn-default">
-                    › 
+                    ›
                   </button>
                 </div>
             </div>
           </div>
-          
-
-
-
-
-        </div>
-
     </div>
 </div>

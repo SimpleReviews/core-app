@@ -20,9 +20,5 @@ module.exports = View.extend({
       var reviewListItemView = new ReviewListItemView({ model: item });
       self.$el.append(reviewListItemView.render().el);
     });
-  },
-
-  addReview: function(item) {
-    this.collection.push(new Review(item));
   }
 });

@@ -1,19 +1,23 @@
 <div class="wrapper">
-  <div class="text-center">
-    <h1>No more boring reviews.</h1>
-    <p>Read a few bullet points, watch some videos and make a decision.</p>
-  </div>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="text-center">
+                <h1>No more boring reviews.</h1>
+                <p>Read a few bullet points, watch some videos and make a decision.</p>
+            </div>
+        </div>
+    </div>
   <br>
   <form id="product-search-form">
-    <div class="form-group">
-      <input type="text" id="query" class="form-control categories-search" placeholder="Search products"/>
+    <div class="form-group form-group-lg">
+      <input type="text" id="query" class="form-control categories-search input-lg" placeholder="Search products"/>
     </div>
   </form>
 
   <div class="halves">
     {{#each}}
     <div class="grid-cell">
-      <div class="panel panel-default">
+      <div class="panel panel-simple">
         <div class="panel-body">
           <h4 class="category-name">
             <span class="overflow-wrapper">
@@ -22,11 +26,11 @@
           </h4>
         </div>
         <div class="panel-footer clearfix">
-          <span class="badge badge-green pull-right">{{products.length}} Products</span>
-          <div class="overflow-wrapper">
+          <span class="panel-footer-count pull-right">{{products.length}} Products</span>
+          <div class="panel-imgs">
             {{#each products}}
               <a href="/#/products/{{id}}" data-toggle="tooltip" title="{{name}}" data-placement="bottom">
-                <img src="{{thumbnail}}" class="img-rounded" height="20"/>
+                <img src="{{thumbnail}}" class="panel-img" height="20"/>
               </a>
             {{/each}}
           </div>

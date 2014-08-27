@@ -36,6 +36,7 @@ body .navbar-brand {
 body h1 {
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 20px;
+  margin-top:0;
 }
 
 body .alert {
@@ -90,13 +91,9 @@ div .text-center {
 .jumbotron {
     padding-top: 10px;
     padding-bottom: 10px;
-}
-
-.jumbotron {
     margin-bottom: 40px;
     color: #2A363B;
-    background-color: #2A363B;
-    color:#E9E9E9;
+    background: transparent;
     border-radius: 7px;
     margin: 40px;
     /*box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(0, 0, 0, 0.1);*/
@@ -121,12 +118,6 @@ div .text-center {
   display: block;
 }
 
-.category-name {
-  font-size: 24px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
 .halves {
   margin-right: -20px;
 }
@@ -137,9 +128,7 @@ div .text-center {
   padding-right: 20px;
 }
 
-.panel-body {
-  overflow: hidden;
-}
+
 
 .overflow-wrapper {
   max-width: 100%;
@@ -157,7 +146,6 @@ div .text-center {
 
 #categories {
   text-align:center;
-
 }
 
 #positive-input, #negative-input{
@@ -246,7 +234,12 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 
 .row {
-    max-width:100%
+    max-width:100%;
+    margin:0;
+}
+
+.section{
+    padding-bottom:5em;
 }
 
 .lead {
@@ -255,7 +248,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 
 #catSearch {
     margin-bottom:10px;
-
 }
 
 #jumbSearch{
@@ -268,7 +260,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
     width: 100%;
 }
 
-}
 #jumbSearch:hover {
     background-color:#fafafa;
     color:#207cca;
@@ -282,16 +273,15 @@ a {
     color:#E28FA3;
 }
 
+a:hover {
+    color:#2A363B;
+}
 div.col-xs-6 col-md-3 a{
     margin:10px;
 }
 
 .categories-hyper {
     margin:10px;
-}
-
-.row {
-    margin:5%;
 }
 
 h4 {
@@ -327,4 +317,144 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     border-color: rgba(255, 255, 255, 3);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(42, 54, 59, 3);
     outline: 0 none;
+}
+
+.breadcrumb{
+    background-color:#2A363B;
+    border-radius:0;
+}
+
+.breadcrumb > li + li:before {
+    padding: 0px 5px;
+    content: "›";
+    color: #FFF;
+}
+
+.breadcrumb > .active {
+    color: #FFF;
+}
+
+.breadcrumb a:hover{
+    color: #FFF;
+}
+
+.navbar {
+    margin: 0px;
+    box-shadow: none;
+}
+
+.panel-body {
+  padding-left:5px;
+  overflow: hidden;
+}
+
+.panel-simple{
+    border-top:15px solid #8EA58C;
+    border-right:15px solid #8EA58C;
+    border-left: 15px solid #99B898;
+    border-bottom: 15px solid #99B898;
+    border-radius:0;
+    -webkit-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+    -moz-box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+    box-shadow: 5px 5px 20px 1px rgba(42,54,59,0.2);
+}
+
+.category-name {
+  font-size: 2em;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.panel-footer{
+   background-color: #99B898;
+   padding:0;
+   border:0;
+   border-radius:0;
+}
+
+.panel-footer-count{
+    font-weight:100;
+    padding:1.5ex;
+    color:#fff;
+}
+
+.panel-imgs{
+    max-width:240px;
+    max-height:40px;
+    overflow:hidden;
+    border-radius:0; 
+}
+
+.panel-img{
+    height:40px;
+    width:40px;
+    margin-right:-4px;
+    border-radius:0; 
+}
+
+.hashtag{
+    font-size: 1.4ex;
+    font-weight: 100;
+    font-family: 'Roboto Condensed';
+    padding: 1ex;
+    color: #99B898;
+}
+
+.overlay{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.1);
+    text-align:center;
+    opacity:0;
+    -webkit-transition: opacity .25s ease;
+    -moz-transition: opacity .25s ease;
+}
+
+.review-item {
+    overflow:hidden;
+}
+
+.agree{
+    font-size: 2em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+a.list-group-item-positive:hover .agree{
+    color:rgba(255,255,255,.9)
+}
+
+a.list-group-item-negative:hover .agree{
+    color:rgba(0,0,0,.9)
+}
+
+.review-item:hover .overlay{
+    opacity:1;
+}
+
+.list-group-item{
+    margin-bottom:2px;
+}
+
+
+a.list-group-item-positive{
+    color: #000;
+    background-color: #99B898;
+}
+
+a.list-group-item-positive:hover{
+    color: transparent;
+    background-color: #99B898;
+}
+
+a.list-group-item-negative{
+    color: #fff;
+    background-color: #E8495F;
+}
+
+a.list-group-item-negative:hover{
+    color: transparent;
+    background-color: #C64259;
 }

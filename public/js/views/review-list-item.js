@@ -12,11 +12,6 @@ module.exports = View.extend({
 
   initialize: function() {
     console.log('review list item');
-    if (this.model.get('type') === 'positive') {
-      this.model.set('style', 'success');
-    } else {
-      this.model.set('style', 'danger');
-    }
   },
 
   handleClick: function(e) {
