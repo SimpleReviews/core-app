@@ -97,10 +97,6 @@ div .text-center {
     background-color: #AED1A9;
 }
 
-.add-review {
-    width:100%;
-}
-
 .jumbotron {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -172,8 +168,8 @@ div .text-center {
 
 #positive-input, #negative-input{
     background-color:#2A363B;
-    color:#fff;
-    border-radius:0;
+    color:#fff !important;
+    border-radius:3px;
     width: 100%;
     text-align: center;
     font-size:1.5em;
@@ -186,9 +182,21 @@ div .text-center {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 10px rgba(42, 54, 59, 3);
     outline: 0 none;
     background-color:#fff;
-    color:#2A363B;
+    color:#2A363B !important;
     font-weight:100;
     cursor: text;
+}
+
+.add-review::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+.add-review::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+.add-review:-ms-input-placeholder { /* IE10+ */
+  color: #ffffff !important;
 }
 
 ul.thumbnails.image_picker_selector li .thumbnail.selected {
@@ -528,9 +536,18 @@ a.list-group-item-negative:hover{
     -webkit-box-shadow: inset 0 -4px 0 rgba(255,255,255,0.2);
 }
 
-.btn-simple:hover, .btn-simple:active{
+.btn-simple:hover, .btn-simple:focus{
     color:rgba(255,255,255,0.5);
-    box-shadow: inset 0 -5px 0 rgba(255,255,255,0.4);
-    -webkit-transition: opacity .25s ease;
-    -moz-transition: opacity .25s ease;
+    box-shadow: inset 0 -3px 0 rgba(255,255,255,0.4);
 }
+
+.add-review {
+    width:100%;
+    font-weight:100;
+    font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    box-shadow: inset 0 -4px 0 rgba(255,255,255,0.2);
+    -webkit-box-shadow: inset 0 -4px 0 rgba(255,255,255,0.2);
+}
+
