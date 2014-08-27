@@ -72,6 +72,14 @@ module.exports = View.extend({
   },
 
   renderInstagram: function() {
+    function getCaption(item){
+        if (item.caption){
+            return item.caption.text;
+        }
+        else{
+            return "No Description";
+        }       
+    }
     $.ajax({
       url: '/instagram/recent?q='+this.model.get('hashtag')+'&count=14',
       type: 'GET',
@@ -83,20 +91,20 @@ module.exports = View.extend({
         for (var i in res){
             var url = res[i].link;
             var thumbnail = res[i].images.thumbnail.url;
-            var alt;
-            if (res[i].caption){
-                alt = res[i].caption.text;
-            }
-            else{
-                alt = "No Description";
-            }
-            $('#instagram').append('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" alt="' + alt + '" width="150" height="150" class="cloud9-item"></a>');
+            var alt = getCaption(res[i]);
+
+            $('#instagram').append('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" alt="' + i + '" width="150" height="150" class="cloud9-item"></a>');
         }
         $("#instagram").Cloud9Carousel( {
           buttonLeft: $("#instagram-buttons > .left"),
           buttonRight: $("#instagram-buttons > .right"),
           speed: 10,
-          bringToFront: true
+          bringToFront: true,
+          onRendered: function(carousel) {
+            $('#insta-desc').text(getCaption(res[carousel.nearestItem().element.alt]));
+            $('#insta-user').html(function(){return res[carousel.nearestItem().element.alt].user.username;});
+            $('#insta-likes').html(function(){return res[carousel.nearestItem().element.alt].likes.count;});
+          }
         });
       }
     });
