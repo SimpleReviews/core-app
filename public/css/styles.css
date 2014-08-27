@@ -133,6 +133,13 @@ div .text-center {
     margin-bottom: 5px;
 }
 
+.product-name {
+    font-size: 24px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left:2.6em;
+}
+
 .halves {
     margin-right: -20px;
 }
@@ -382,6 +389,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 }
 
 .panel-simple{
+    position:relative;
     border-top:15px solid #8EA58C;
     border-right:15px solid #8EA58C;
     border-left: 15px solid #99B898;
@@ -423,6 +431,13 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     width:40px;
     margin-right:-4px;
     border-radius:0;
+}
+
+.panel-img-product{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
 }
 
 .hashtag{
