@@ -569,4 +569,5 @@ a.list-group-item-negative:hover{
     background-color: transparent;
     font-size: 2.4ex;
     font-family: 'Montserrat', sans-serif;
+    color:inherit;
 }
