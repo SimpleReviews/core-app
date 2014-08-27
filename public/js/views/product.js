@@ -1,5 +1,8 @@
 var View = require('./base');
 var template = require('../../templates/product.hbs');
+var ReviewCollection = require('../collections/reviews');
+var ReviewListView = require('./review-list');
+var Auth = require('../models/auth');
 
 module.exports = View.extend({
 
@@ -12,10 +15,35 @@ module.exports = View.extend({
 
   initialize: function(options) {
     console.log('product');
+    this.positiveReviews = new ReviewCollection(this.model.get('positiveReviews'));
+    this.negativeReviews = new ReviewCollection(this.model.get('negativeReviews'));
   },
 
   afterRender: function() {
     $("videos").css('visibility','hidden');
+    this.renderPositiveReviews();
+    this.renderNegativeReviews();
+    this.renderYoutube();
+    this.renderInstagram();
+  },
+
+  renderPositiveReviews: function() {
+    this.positiveReviewsView = new ReviewListView({
+      collection: this.positiveReviews
+    });
+    this.positiveReviewsView.setElement($('#positive'));
+    this.positiveReviewsView.render();
+  },
+
+  renderNegativeReviews: function() {
+    this.negativeReviewsView = new ReviewListView({
+      collection: this.negativeReviews
+    });
+    this.negativeReviewsView.setElement($('#negative'));
+    this.negativeReviewsView.render();
+  },
+
+  renderYoutube: function() {
     $.ajax({
       url: '/youtube/search?q='+this.model.get('name').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," "),
       type: 'GET',
@@ -33,11 +61,6 @@ module.exports = View.extend({
           buttonRight: $("#video-buttons > .right"),
           speed: 10,
           bringToFront: true,
-          onLoaded: function() {
-            showcase.css( 'visibility', 'visible' );
-            showcase.css( 'display', 'none' );
-            showcase.fadeIn( 1500 );
-          },
           onRendered: function(carousel) {
             $('#youtube-title').text(res[carousel.nearestItem().element.alt].title);
             $('#youtube-body').html(function(){return '';});
@@ -49,6 +72,9 @@ module.exports = View.extend({
         });
       }
     });
+  },
+
+  renderInstagram: function() {
     $.ajax({
       url: '/instagram/recent?q='+this.model.get('hashtag')+'&count=14',
       type: 'GET',
@@ -74,60 +100,57 @@ module.exports = View.extend({
   },
 
   addPositive: function(e) {
-    var self = this;
     e.preventDefault();
-    text = this.$el.find('#positive-input').val();
-    console.log(text);
-    $.ajax({
-        type: 'POST',
-        url: '/reviews',
-        data: {
-            text:text,
-            count: 1,
-            type: "positive",
-            product: this.model.get('id')
-        },
-        success: function(data){
-            console.log('working....');
-        },
-        error: function(data){
-            console.log(data);
-        }
-    })
-    .done(function(res) {
-      console.log('res: ' + res.message);
-      for (var i in res){
-          console.log(i);
+    var self = this;
+    var text = this.$el.find('#positive-input').val();
+    if (!Auth.currentUser) {
+      this.renderSigninPage();
+      return;
+    }
+    this.positiveReviews.create({
+      text: text,
+      count: 1,
+      type: 'positive',
+      product: this.model.get('id'),
+      user_id: Auth.currentUser.email
+    }, {
+      success: function(model) {
+        self.$el.find('#positive-input').val('');
+      },
+      error: function(model, xhr) {
+        console.log(xhr);
       }
-      self.model.get('positiveReviews').push(res);
-      self.render();
     });
   },
 
   addNegative: function(e) {
-    var self = this;
     e.preventDefault();
-    text = this.$el.find('#negative-input').val();
-    console.log(text);
-    $.ajax({
-        url: '/reviews',
-        type: 'POST',
-        data: {
-            text: text,
-            count: 1,
-            type: "negative",
-            product: this.model.get('id')
-        },
-        success: function(data){
-            console.log(data);
-        },
-        error: function(data){
-            console.log(data);
-        }
-    })
-    .done(function(res) {
-      self.model.get('negativeReviews').push(res);
-      self.render();
+    var self = this;
+    var text = this.$el.find('#negative-input').val();
+    if (!Auth.currentUser) {
+      this.renderSigninPage();
+      return;
+    }
+    this.negativeReviews.create({
+      text: text,
+      count: 1,
+      type: 'negative',
+      product: this.model.get('id'),
+      user_id: Auth.currentUser.email
+    }, {
+      success: function(model) {
+        self.$el.find('#negative-input').val('');
+      },
+      error: function(model, xhr) {
+        console.log(xhr);
+      }
     });
+  },
+
+  renderSigninPage: function() {
+    window.app.navigate('#/signin', { trigger: true });
+    window.app.appView.currentView.transitionTo = '#/products/'+this.model.get('id');
+    window.app.appView.currentView.error = 'Please login to add a review.';
+    window.app.appView.currentView.render();
   }
 });

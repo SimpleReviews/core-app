@@ -4,11 +4,17 @@ var _ = require('underscore');
 var Product = Backbone.Model.extend({
   parse: function(response) {
     console.log(response);
-    response.positiveReviews = _.filter(response.reviews, function(item) {
+    var positiveReviews = _.filter(response.reviews, function(item) {
       return item.type === 'positive';
     });
-    response.negativeReviews = _.filter(response.reviews, function(item) {
+    var negativeReviews = _.filter(response.reviews, function(item) {
       return item.type === 'negative';
+    });
+    response.positiveReviews = _.sortBy(positiveReviews, function(item) {
+      return +item.count;
+    });
+    response.negativeReviews = _.sortBy(negativeReviews, function(item) {
+      return +item.count;
     });
     return response;
   }

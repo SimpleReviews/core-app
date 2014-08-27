@@ -30,7 +30,7 @@ router.get('/:id', function(req, res) {
 router.put('/:id', function(req, res) {
   db.put('reviews', req.params.id, req.body)
     .then(function(results) {
-      //denorm.run({ collection: 'reviews' });
+      denorm.run('products', req.body.product);
       res.status(results.statusCode);
     })
     .fail(function(err) {
