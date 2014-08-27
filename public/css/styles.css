@@ -2,17 +2,17 @@
     .nav navbar-nav{
         position:absolute;
         right:0;
-  }
+    }
     body .navbar-brand {
         position:absolute;
         left:0;
         margin-left:15px;
-  }
+    }
     .wrapper {
         max-width:100%;
         /* margin-right:15px; */
         padding:0;
-  }
+    }
     body .grid-cell{
         width: 100%;
         margin-right:auto;
@@ -30,12 +30,19 @@
         margin-left:5px;
         margin-bottom:15px;
         padding-left:0;
-  }
+    }
 
     body .wrapper {
         max-width:100%;
         padding:0;
-  }
+    }
+
+    body .grid-cell{
+        width: 100%;
+        margin-right:auto;
+        margin-left:auto;
+    }
+
 }
 
 
