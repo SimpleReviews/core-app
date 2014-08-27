@@ -4,9 +4,11 @@
       <li><a href="#/categories/{{categories.id}}">{{categories.name}}</a></li>
       <li class="active">{{name}}</li>
     </ol>
-
-    <h1>{{name}}<span class="hashtag">#{{hashtag}}</span></h1>
-
+    <div class="row section">
+        <h1>{{name}}<span class="hashtag">#{{hashtag}}</span></h1>
+    </div>
+    
+    <div class="section">
         <div class="row">
             <div class="col-xs-6 text-center">
                 <img src="/img/positive.png" src="Positive">
@@ -16,55 +18,58 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6">
-                <div id="positive" class="list-group">
-                  <h3>Positive Reviews</h3>
-                  {{#each positiveReviews}}
-                    <a href="" class="list-group-item list-group-item-success review-item">
-                        <span class="badge">{{count}}</span>
-                        {{text}}
-                        <div class="overlay">
-                            <span class="agree">FACT!</span>
-                        </div>
-                    </a>
-                  {{else}}
-                    <div class="well">There are no positive reviews.</div>
-                  {{/each}}
+                <div class="col-xs-6">
+                    <div id="positive" class="list-group">
+                      <h3>Positive Reviews</h3>
+                      {{#each positiveReviews}}
+                        <a href="" class="list-group-item list-group-item-positive review-item">
+                            <span class="badge">{{count}}</span>
+                            {{text}}
+                            <div class="overlay">
+                                <span class="agree">FACT!</span>
+                            </div>
+                        </a>
+                      {{else}}
+                        <div class="well">There are no positive reviews.</div>
+                      {{/each}}
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <h3>Negative Reviews</h3>
+                    <div id="negative" class="list-group">
+                      {{#each negativeReviews}}
+                        <a href="" class="list-group-item list-group-item-negative review-item">
+                            <span class="badge">{{count}}</span>
+                            {{text}}
+                            <div class="overlay">
+                                <span class="agree">FACT!</span>
+                            </div>
+                        </a>
+                        {{else}}
+                          <div class="well">There are no negative reviews.</div>
+                      {{/each}}
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-6">
-                <h3>Negative Reviews</h3>
-                <div id="negative" class="list-group">
-                  {{#each negativeReviews}}
-                    <a href="" class="list-group-item list-group-item-danger review-item">
-                        <span class="badge">{{count}}</span>
-                        {{text}}
-                        <div class="overlay">
-                            <span class="agree">FACT!</span>
-                        </div>
-                    </a>
-                    {{else}}
-                      <div class="well">There are no negative reviews.</div>
-                  {{/each}}
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <form id='add-positive' class="form-inline text-center">
+                        <input type="text" name="text" class="add-review form-control input-lg" id="positive-input" placeholder="Add a positive review">
+                        <button id="add-positive" class="btn btn-default hide">Add</button>
+                    </form>
+                </div>
+                <div class="col-xs-6">
+                    <form id='add-negative' class="add-review form-inline text-center">
+                        <input type="text" name="text" class="add-review form-control input-lg" id="negative-input" placeholder="Add a negative review">
+                        <button type="submit" class="btn btn-default hide">Add</button>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-6">
-                <form id='add-positive' class="form-inline text-center">
-                    <input type="text" name="text" class="add-review form-control input-lg" id="positive-input" placeholder="Add a positive review">
-                    <button id="add-positive" class="btn btn-default hide">Add</button>
-                </form>
-            </div>
-            <div class="col-xs-6">
-                <form id='add-negative' class="add-review form-inline text-center">
-                    <input type="text" name="text" class="add-review form-control input-lg" id="negative-input" placeholder="Add a negative review">
-                    <button type="submit" class="btn btn-default hide">Add</button>
-                </form>
-            </div>
-        </div>
-        <div class="row">
+    <div class="row section">
+        <div class="col-xs-12">
             <h3>Youtube</h3>
                 <div id="videos" class="scrolls">
                 </div>
@@ -89,10 +94,11 @@
                     </div>
                 </div>
         </div>
+    </div>
 
-        <div class="row">
+    <div class="row section">
+        <div class="col-xs-12">
             <h3>Instagram</h3>
-            <div>
               <div id="instagram" class="scrolls">
               </div>
             <div class="text-center">
@@ -106,11 +112,5 @@
                 </div>
             </div>
           </div>
-          
-
-
-
-
-        </div>
-
+    </div> 
 </div>

@@ -36,6 +36,7 @@ body .navbar-brand {
 body h1 {
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 20px;
+  margin-top:0;
 }
 
 body .alert {
@@ -233,7 +234,12 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 
 .row {
-    max-width:100%
+    max-width:100%;
+    margin:0;
+}
+
+.section{
+    padding-bottom:5em;
 }
 
 .lead {
@@ -414,9 +420,41 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 .agree{
     font-size: 2em;
     font-family: 'Montserrat', sans-serif;
+}
+
+a.list-group-item-positive:hover .agree{
     color:rgba(255,255,255,.9)
+}
+
+a.list-group-item-negative:hover .agree{
+    color:rgba(0,0,0,.9)
 }
 
 .review-item:hover .overlay{
     opacity:1;
+}
+
+.list-group-item{
+    margin-bottom:2px;
+}
+
+
+a.list-group-item-positive{
+    color: #000;
+    background-color: #99B898;
+}
+
+a.list-group-item-positive:hover{
+    color: transparent;
+    background-color: #99B898;
+}
+
+a.list-group-item-negative{
+    color: #fff;
+    background-color: #E8495F;
+}
+
+a.list-group-item-negative:hover{
+    color: transparent;
+    background-color: #C64259;
 }
