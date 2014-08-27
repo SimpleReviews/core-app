@@ -50,23 +50,31 @@ module.exports = View.extend({
       error: function() {
       },
       success: function(res) {
-        $('#videos').html(function(){return '';});
-        for (var i in res){
-            var url = res[i].url;
-            var thumbnail = res[i].thumbnails[0].url;
-            $('#videos').prepend('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" height="150" class="cloud9-item" alt=' + i + ' targer="_blank"></a>');
+        if (res.length === 0){
+            $('div#videos.scrolls').detach();
+            $('#youtube-label').detach();
+            $('#video-buttons').detach();
+            $('#youtube-title').text("No videos found.");
         }
-        $("#videos").Cloud9Carousel( {
-          buttonLeft: $("#video-buttons > .left"),
-          buttonRight: $("#video-buttons > .right"),
-          speed: 10,
-          bringToFront: true,
-          onRendered: function(carousel) {
-            $('#youtube-title').text(res[carousel.nearestItem().element.alt].title);
-            $('#youtube-youtuber').html(function(){return res[carousel.nearestItem().element.alt].author;});
-            $('#youtube-views').html(function(){return res[carousel.nearestItem().element.alt].statistics.viewCount;});
-          }
-        });
+        else{
+            $('#videos').html(function(){return '';});
+            for (var i in res){
+                var url = res[i].url;
+                var thumbnail = res[i].thumbnails[0].url;
+                $('#videos').prepend('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" height="150" class="cloud9-item" alt=' + i + ' targer="_blank"></a>');
+            }
+            $("#videos").Cloud9Carousel( {
+              buttonLeft: $("#video-buttons > .left"),
+              buttonRight: $("#video-buttons > .right"),
+              speed: 10,
+              bringToFront: true,
+              onRendered: function(carousel) {
+                $('#youtube-title').text(res[carousel.nearestItem().element.alt].title);
+                $('#youtube-youtuber').html(function(){return res[carousel.nearestItem().element.alt].author;});
+                $('#youtube-views').html(function(){return res[carousel.nearestItem().element.alt].statistics.viewCount;});
+              }
+            });
+        }
       }
     });
   },
@@ -88,24 +96,33 @@ module.exports = View.extend({
       },
       success: function(res) {
         $('#instagram').html(function(){return '';});
-        for (var i in res){
-            var url = res[i].link;
-            var thumbnail = res[i].images.thumbnail.url;
-            var alt = getCaption(res[i]);
-
-            $('#instagram').append('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" alt="' + i + '" width="150" height="150" class="cloud9-item"></a>');
+        console.log(res.length === 0);
+        if (res.length === 0){
+            $('div#instagram.scrolls').detach();
+            $('.insta-label').detach();
+            $('#instagram-buttons').detach();
+            $('#insta-desc').text("No images found.");
         }
-        $("#instagram").Cloud9Carousel( {
-          buttonLeft: $("#instagram-buttons > .left"),
-          buttonRight: $("#instagram-buttons > .right"),
-          speed: 10,
-          bringToFront: true,
-          onRendered: function(carousel) {
-            $('#insta-desc').text(getCaption(res[carousel.nearestItem().element.alt]));
-            $('#insta-user').html(function(){return res[carousel.nearestItem().element.alt].user.username;});
-            $('#insta-likes').html(function(){return res[carousel.nearestItem().element.alt].likes.count;});
-          }
-        });
+        else{
+            for (var i in res){
+                var url = res[i].link;
+                var thumbnail = res[i].images.thumbnail.url;
+                var alt = getCaption(res[i]);
+
+                $('#instagram').append('<a href="' + url + '" target="_blank"><img src="' + thumbnail + '" alt="' + i + '" width="150" height="150" class="cloud9-item"></a>');
+            }
+            $("#instagram").Cloud9Carousel( {
+              buttonLeft: $("#instagram-buttons > .left"),
+              buttonRight: $("#instagram-buttons > .right"),
+              speed: 10,
+              bringToFront: true,
+              onRendered: function(carousel) {
+                $('#insta-desc').text(getCaption(res[carousel.nearestItem().element.alt]));
+                $('#insta-user').html(function(){return res[carousel.nearestItem().element.alt].user.username;});
+                $('#insta-likes').html(function(){return res[carousel.nearestItem().element.alt].likes.count;});
+              }
+            });
+        }
       }
     });
   },
