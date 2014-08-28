@@ -230,6 +230,19 @@ div .text-center {
   color: #ffffff !important;
 }
 
+.add-review:focus::-webkit-input-placeholder{
+  color: #2A363B !important;
+}
+
+.add-review:focus::-moz-placeholder{
+  color: #2A363B !important;
+}
+
+.add-review:focus:-ms-input-placeholder:active { /* IE10+ */
+  color: #2A363B !important;
+}
+
+
 ul.thumbnails.image_picker_selector li .thumbnail.selected {
     background: rgba(42, 54, 59, 3);
 }
