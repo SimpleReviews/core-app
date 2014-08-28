@@ -19,10 +19,12 @@ module.exports = View.extend({
     var count = +this.model.get('count') + 1;
     var users = this.model.get('user_ids');
     if (this.model.get('user_ids').indexOf(Auth.currentUser.email) >= 0) {
+      console.log(this.$el);
       console.log("IS USER IN THE LIST: " + this.model.get('user_ids').indexOf(Auth.currentUser.email) >= 0);
       console.log("USERS WHO VOTED: " + this.model.get('user_ids'));
       console.log("CURRENT USER: " + Auth.currentUser.email);
       console.log('USER ALREADY VOTED');
+      this.el.firstChild.firstElementChild.nextElementSibling.firstElementChild.firstChild.data = "NO CHEATING";
       return;
     }
     if (this.model.get('user_ids').indexOf(Auth.currentUser.email) < 0) {
@@ -34,6 +36,7 @@ module.exports = View.extend({
       users.push(Auth.currentUser.email);
       this.model.set('user_ids', users);
       this.model.save();
+      this.el.firstChild.firstElementChild.nextElementSibling.firstElementChild.firstChild.data = "TOTALLY!"; //NOT WORKING
       this.render();
     }
   }
