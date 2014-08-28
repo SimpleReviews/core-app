@@ -200,10 +200,11 @@ div .text-center {
 #positive-input, #negative-input{
     background-color:#2A363B;
     color:#fff !important;
-    border-radius:3px;
+    border-radius:6px;
     width: 100%;
+    height:2.3em;
     text-align: center;
-    font-size:1.5em;
+    font-size:3ex;
     cursor: pointer;
     font-weight:200;
     text-transform: uppercase;
@@ -502,6 +503,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 }
 
 .review-item {
+    height:5ex;
     font-size:2.4ex;
     overflow:hidden;
     box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1);
@@ -510,8 +512,11 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 }
 
 .agree{
-    font-size: 2em;
     font-family: 'Montserrat', sans-serif;
+    font-size: 3ex;
+    vertical-align: middle;
+    padding-bottom: 1ex;
+    padding-top: 2ex;
 }
 
 a.list-group-item-positive:hover .agree{
@@ -606,8 +611,8 @@ a.list-group-item-negative:hover{
     font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
     border-radius: 15px;
     -webkit-border-radius: 15px;
-    box-shadow: inset 0 -4px 0 rgba(255,255,255,0.1);
-    -webkit-box-shadow: inset 0 -4px 0 rgba(255,255,255,0.1);
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.6);
+    -webkit-box-shadow: inset 0 -4px 0 rgba(0,0,0,0.6);
 }
 
 .add-review:hover{
