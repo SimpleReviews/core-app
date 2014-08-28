@@ -140,7 +140,7 @@ module.exports = View.extend({
       count: 1,
       type: 'positive',
       product: this.model.get('id'),
-      user_id: Auth.currentUser.email
+      user_ids: [Auth.currentUser.email]
     }, {
       success: function(model) {
         self.$el.find('#positive-input').val('');
@@ -164,7 +164,7 @@ module.exports = View.extend({
       count: 1,
       type: 'negative',
       product: this.model.get('id'),
-      user_id: Auth.currentUser.email
+      user_ids: [Auth.currentUser.email]
     }, {
       success: function(model) {
         self.$el.find('#negative-input').val('');
