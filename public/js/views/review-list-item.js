@@ -16,18 +16,23 @@ module.exports = View.extend({
 
   handleClick: function(e) {
     e.preventDefault();
-    var canVote = true;
     var count = +this.model.get('count') + 1;
-    if (Auth.currentUser.email === this.model.get('user_id')) {
+    var users = this.model.get('user_ids');
+    if (this.model.get('user_ids').indexOf(Auth.currentUser.email) >= 0) {
+      console.log("IS USER IN THE LIST: " + this.model.get('user_ids').indexOf(Auth.currentUser.email) >= 0);
+      console.log("USERS WHO VOTED: " + this.model.get('user_ids'));
+      console.log("CURRENT USER: " + Auth.currentUser.email);
+      console.log('USER ALREADY VOTED');
       return;
     }
-    this.model.collection.each(function(item) {
-      if (item.get('user_id') === Auth.currentUser) {
-        canVote = true;
-      }
-    });
-    if (canVote) {
+    if (this.model.get('user_ids').indexOf(Auth.currentUser.email) < 0) {
+      console.log("LOCATION OF USER IN THE LIST: " + this.model.get('user_ids').indexOf(Auth.currentUser.email));
+      console.log("USERS WHO VOTED: " + this.model.get('user_ids'));
+      console.log("CURRENT USER: " + Auth.currentUser.email);
+      console.log('USER JUST VOTED');
       this.model.set('count', count);
+      users.push(Auth.currentUser.email);
+      this.model.set('user_ids', users);
       this.model.save();
       this.render();
     }
