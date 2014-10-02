@@ -1,8 +1,6 @@
 Simple Reviews app
 ============
 
-### **** WIP ****
-
 Installation
 --------------
 
